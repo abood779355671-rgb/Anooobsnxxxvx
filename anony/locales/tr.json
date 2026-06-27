@@ -151,5 +151,18 @@
     "help_5": "Oynat",
     "help_6": "Sıra",
     "help_7": "İstatistikler",
-    "help_8": "Sudo Kullanıcıları"
+    "help_8": "Sudo Kullanıcıları",
+    "song_usage": "<b>Kullanım:</b>\n\n<code>/song şarkı adı</code>",
+    "song_unsupported": "Bu bağlantı desteklenmiyor. Geçerli bir YouTube bağlantısı gönderin.",
+    "song_searching": "Aranıyor...",
+    "song_not_found": "Aramanız için sonuç bulunamadı. Farklı kelimeler deneyin.",
+    "song_live_unsupported": "Canlı yayınlar ses dosyası olarak indirilemez.",
+    "song_too_long": "Bu parça {0} dakikalık indirme sınırını aşıyor.",
+    "song_downloading": "İndiriliyor: <b>{0}</b>",
+    "song_download_failed": "Parça indirilemedi. Lütfen daha sonra tekrar deneyin.",
+    "song_uploading": "Yükleniyor...",
+    "song_send_failed": "Ses dosyası gönderilemedi.",
+    "song_caption": "🎵 <b>{0}</b>",
+    "help_9": "🔍 Arama",
+    "help_song": "<u><b>Arama komutları:</b></u>\n<i>Görüntülü sohbete katılmadan bir parçayı doğrudan ses dosyası olarak indirin.</i>\n\n/song [şarkı adı/youtube bağlantısı/bağlantıya yanıt]: Bir parçayı arayın ve ses olarak indirin.\n\n<b>Örnek:</b> <code>/song attention</code>"
 }
