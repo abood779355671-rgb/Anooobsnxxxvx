@@ -33,7 +33,7 @@ class Config:
         self.THUMB_GEN: bool = getenv("THUMB_GEN", "True").lower() == "true"
         self.VIDEO_PLAY: bool = getenv("VIDEO_PLAY", "True").lower() == "true"
 
-        self.LANG_CODE = getenv("LANG_CODE", "en")
+        self.LANG_CODE = getenv("LANG_CODE", "ar")
 
         # ── ArtistBots API (YouTube bypass for datacenter IPs) ──────────────
         # When set, the bot downloads audio/video via:
