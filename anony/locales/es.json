@@ -151,5 +151,18 @@
     "help_5": "Reproducir",
     "help_6": "Cola",
     "help_7": "Estadísticas",
-    "help_8": "Sudoers"
+    "help_8": "Sudoers",
+    "song_usage": "<b>Uso:</b>\n\n<code>/song nombre de la canción</code>",
+    "song_unsupported": "Este enlace no es compatible. Envía un enlace de YouTube válido.",
+    "song_searching": "Buscando...",
+    "song_not_found": "No se encontraron resultados para tu búsqueda. Intenta con otras palabras.",
+    "song_live_unsupported": "No se pueden descargar transmisiones en vivo como archivo de audio.",
+    "song_too_long": "Esta canción supera el límite de descarga de {0} minutos.",
+    "song_downloading": "Descargando: <b>{0}</b>",
+    "song_download_failed": "Error al descargar la canción. Inténtalo de nuevo más tarde.",
+    "song_uploading": "Subiendo...",
+    "song_send_failed": "Error al enviar el archivo de audio.",
+    "song_caption": "🎵 <b>{0}</b>",
+    "help_9": "🔍 Buscar",
+    "help_song": "<u><b>Comandos de búsqueda:</b></u>\n<i>Descarga una canción directamente como archivo de audio sin unirte al chat de video.</i>\n\n/song [nombre de la canción/URL de YouTube/respuesta a un enlace]: Busca y descarga una canción como audio.\n\n<b>Ejemplo:</b> <code>/song attention</code>"
 }
