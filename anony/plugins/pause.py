@@ -9,7 +9,7 @@ from anony import anon, app, db, lang
 from anony.helpers import buttons, can_manage_vc, cmd
 
 
-@app.on_message(cmd(["pause"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["pause", "توقف", "بوز"]) & filters.group & ~app.bl_users)
 @lang.language()
 @can_manage_vc
 async def _pause(_, m: types.Message):
