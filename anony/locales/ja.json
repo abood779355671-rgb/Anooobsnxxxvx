@@ -151,5 +151,18 @@
     "help_5": "再生",
     "help_6": "キュー",
     "help_7": "統計",
-    "help_8": "Sudoers"
+    "help_8": "Sudoers",
+    "song_usage": "<b>使用法:</b>\n\n<code>/song 曲名</code>",
+    "song_unsupported": "このリンクはサポートされていません。有効なYouTubeリンクを送信してください。",
+    "song_searching": "検索中...",
+    "song_not_found": "検索結果が見つかりませんでした。別のキーワードを試してください。",
+    "song_live_unsupported": "ライブ配信はオーディオファイルとしてダウンロードできません。",
+    "song_too_long": "この曲は{0}分のダウンロード制限を超えています。",
+    "song_downloading": "ダウンロード中: <b>{0}</b>",
+    "song_download_failed": "曲のダウンロードに失敗しました。後でもう一度お試しください。",
+    "song_uploading": "アップロード中...",
+    "song_send_failed": "オーディオファイルの送信に失敗しました。",
+    "song_caption": "🎵 <b>{0}</b>",
+    "help_9": "🔍 検索",
+    "help_song": "<u><b>検索コマンド:</b></u>\n<i>ビデオチャットに参加せずに、曲を直接オーディオファイルとしてダウンロードします。</i>\n\n/song [曲名/YouTube URL/リンクへの返信]: 曲を検索してオーディオとしてダウンロードします。\n\n<b>例:</b> <code>/song attention</code>"
 }
