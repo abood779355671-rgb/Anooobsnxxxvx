@@ -151,5 +151,18 @@
     "help_5": "播放",
     "help_6": "队列",
     "help_7": "统计",
-    "help_8": "Sudoers"
+    "help_8": "Sudoers",
+    "song_usage": "<b>用法: </b>\n\n<code>/song 歌曲名称</code>",
+    "song_unsupported": "不支持此链接。请发送有效的YouTube链接。",
+    "song_searching": "搜索中...",
+    "song_not_found": "未找到搜索结果。请尝试其他关键词。",
+    "song_live_unsupported": "无法将直播下载为音频文件。",
+    "song_too_long": "此曲目超过了 {0} 分钟的下载限制。",
+    "song_downloading": "下载中: <b>{0}</b>",
+    "song_download_failed": "下载曲目失败。请稍后重试。",
+    "song_uploading": "上传中...",
+    "song_send_failed": "发送音频文件失败。",
+    "song_caption": "🎵 <b>{0}</b>",
+    "help_9": "🔍 搜索",
+    "help_song": "<u><b>搜索命令: </b></u>\n<i>无需加入视频聊天即可直接将曲目下载为音频文件。</i>\n\n/song [歌曲名称/youtube链接/回复链接]: 搜索并将曲目下载为音频。\n\n<b>示例: </b> <code>/song attention</code>"
 }
