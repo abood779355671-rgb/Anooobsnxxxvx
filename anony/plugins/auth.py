@@ -11,7 +11,7 @@ from anony import app, db, lang
 from anony.helpers import admin_check, is_admin, utils, cmd
 
 
-@app.on_message(cmd(["auth", "unauth", "تفويض", "إلغاء_تفويض"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["auth", "unauth", "تفويض", "الغ"]) & filters.group & ~app.bl_users)
 @lang.language()
 @admin_check
 async def _auth(_, m: types.Message):
@@ -19,7 +19,7 @@ async def _auth(_, m: types.Message):
     if not user:
         return await m.reply_text(m.lang["user_not_found"])
 
-    if m.command[0] == "auth":
+    if m.command[0] in ["auth", "تفويض"]:
         if await is_admin(m.chat.id, user.id):
             return await m.reply_text(m.lang["auth_is_admin"])
 
@@ -30,7 +30,7 @@ async def _auth(_, m: types.Message):
         await m.reply_text(m.lang["auth_removed"].format(user.mention))
 
 
-@app.on_message(cmd(["authlist"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["authlist", "مفوضين"]) & filters.group & ~app.bl_users)
 @lang.language()
 @admin_check
 async def _authlist(_, m: types.Message):
