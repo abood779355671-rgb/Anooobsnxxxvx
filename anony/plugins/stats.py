@@ -16,7 +16,7 @@ from anony.helpers import cmd
 from anony.plugins import all_modules
 
 
-@app.on_message(cmd(["stats"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["stats", "إحصائيات", "احصائيات"]) & filters.group & ~app.bl_users)
 @lang.language()
 async def _stats(_, m: types.Message):
     sent = await m.reply_photo(
