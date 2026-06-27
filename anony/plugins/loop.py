@@ -9,7 +9,7 @@ from anony import app, db, lang
 from anony.helpers import can_manage_vc, cmd
 
 
-@app.on_message(cmd(["loop"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["loop", "تكرار", "كرر"]) & filters.group & ~app.bl_users)
 @lang.language()
 @can_manage_vc
 async def _loop(_, m: types.Message):
