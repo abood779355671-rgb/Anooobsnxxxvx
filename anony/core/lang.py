@@ -42,18 +42,34 @@ class Language:
         languages = {}
         lang_files = {file.stem: file for file in self.lang_dir.glob("*.json")}
         for lang_code, lang_file in lang_files.items():
-            with open(lang_file, "r", encoding="utf-8") as file:
-                languages[lang_code] = json.load(file)
-        logger.info(f"Loaded languages: {', '.join(languages.keys())}")
+            try:
+                with open(lang_file, "r", encoding="utf-8") as file:
+                    languages[lang_code] = json.load(file)
+            except Exception as e:
+                logger.warning(f"Failed to load language file {lang_file}: {e}")
+        logger.info(f"Loaded languages: {', '.join(sorted(languages.keys()))}")
+        if not languages:
+            logger.error("No language files found! Check anony/locales/ directory.")
         return languages
+
+    def _resolve(self, lang_code: str) -> dict:
+        """Return dict for lang_code, falling back to 'en' or first available."""
+        if lang_code in self.languages:
+            return self.languages[lang_code]
+        if "en" in self.languages:
+            logger.warning(f"Language '{lang_code}' not found, falling back to 'en'")
+            return self.languages["en"]
+        fallback = next(iter(self.languages.values()), {})
+        logger.warning(f"Language '{lang_code}' not found, falling back to first available")
+        return fallback
 
     async def get_lang(self, chat_id: int) -> dict:
         lang_code = await db.get_lang(chat_id)
-        return self.languages[lang_code]
+        return self._resolve(lang_code)
 
     def get_languages(self) -> dict:
         files = {f.stem for f in self.lang_dir.glob("*.json")}
-        return {code: self.lang_codes[code] for code in sorted(files)}
+        return {code: self.lang_codes[code] for code in sorted(files) if code in self.lang_codes}
 
     def language(self):
         def decorator(func):
@@ -83,7 +99,7 @@ class Language:
                     return await chat.leave()
 
                 lang_code = await db.get_lang(chat.id)
-                lang_dict = self.languages[lang_code]
+                lang_dict = self._resolve(lang_code)
 
                 setattr(fallen, "lang", lang_dict)
                 try:
