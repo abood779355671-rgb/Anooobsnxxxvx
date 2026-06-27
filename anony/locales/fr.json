@@ -151,5 +151,18 @@
     "help_5": "Lecture",
     "help_6": "File d'attente",
     "help_7": "Statistiques",
-    "help_8": "Sudoers"
+    "help_8": "Sudoers",
+    "song_usage": "<b>Utilisation :</b>\n\n<code>/song nom de la chanson</code>",
+    "song_unsupported": "Ce lien n'est pas pris en charge. Envoyez un lien YouTube valide.",
+    "song_searching": "Recherche...",
+    "song_not_found": "Aucun résultat trouvé pour votre recherche. Essayez d'autres mots-clés.",
+    "song_live_unsupported": "Les flux en direct ne peuvent pas être téléchargés en tant que fichier audio.",
+    "song_too_long": "Ce titre dépasse la limite de téléchargement de {0} minutes.",
+    "song_downloading": "Téléchargement : <b>{0}</b>",
+    "song_download_failed": "Échec du téléchargement du titre. Veuillez réessayer plus tard.",
+    "song_uploading": "Envoi en cours...",
+    "song_send_failed": "Échec de l'envoi du fichier audio.",
+    "song_caption": "🎵 <b>{0}</b>",
+    "help_9": "🔍 Recherche",
+    "help_song": "<u><b>Commandes de recherche :</b></u>\n<i>Téléchargez un titre directement en tant que fichier audio sans rejoindre le chat vidéo.</i>\n\n/song [nom de la chanson/URL YouTube/répondre à un lien] : Recherche et télécharge un titre en audio.\n\n<b>Exemple :</b> <code>/song attention</code>"
 }
