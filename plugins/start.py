@@ -5,11 +5,11 @@
 import asyncio
 from pyrogram import enums, filters, types
 
-from anony import app, config, db, lang
+from anony import app, config, db, lang, logger
 from anony.helpers import buttons, utils, cmd
 
 
-@app.on_message(cmd(["help", "مساعدة", "مساعده"]) & filters.private & ~app.bl_users)
+@app.on_message(cmd(["help"]) & filters.private & ~app.bl_users)
 @lang.language()
 async def _help(_, m: types.Message):
     await m.reply_text(
@@ -19,7 +19,7 @@ async def _help(_, m: types.Message):
     )
 
 
-@app.on_message(cmd(["start", "ابدأ", "بدء"]))
+@app.on_message(cmd(["start"]))
 @lang.language()
 async def start(_, message: types.Message):
     if message.from_user.id in app.bl_users and message.from_user.id not in db.notified:
@@ -55,7 +55,7 @@ async def start(_, message: types.Message):
         await db.add_chat(message.chat.id)
 
 
-@app.on_message(cmd(["playmode", "settings", "وضع", "اعدادات"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["playmode", "settings"]) & filters.group & ~app.bl_users)
 @lang.language()
 async def settings(_, message: types.Message):
     admin_only = await db.get_play_mode(message.chat.id)
@@ -82,4 +82,16 @@ async def _new_member(_, message: types.Message):
             if await db.is_chat(message.chat.id):
                 return
             await utils.send_log(message, True)
+
+            try:
+                await message.reply_photo(
+                    photo=config.START_IMG,
+                    caption=message.lang["welcome_new_group"].format(
+                        app.name, message.chat.title
+                    ),
+                    reply_markup=buttons.start_key(message.lang, private=False),
+                )
+            except Exception as e:
+                logger.error(f"Failed to send welcome message in {message.chat.id}: {e}")
+
             await db.add_chat(message.chat.id)
