@@ -34,7 +34,7 @@ async def _seek(_, m: types.Message):
         return await m.reply_text(m.lang["play_seek_no_dur"])
 
     sent = await m.reply_text(m.lang["play_seeking"])
-    if m.command[0] == "seekback":
+    if m.command[0] in ["seekback", "تأخير"]:
         stype = m.lang["backward"]
         start_from = media.time - to_seek
         if start_from < 1:
