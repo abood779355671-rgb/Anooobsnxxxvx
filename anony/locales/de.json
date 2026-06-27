@@ -151,5 +151,18 @@
     "help_5": "Wiedergabe",
     "help_6": "Warteschlange",
     "help_7": "Statistiken",
-    "help_8": "Sudoers"
+    "help_8": "Sudoers",
+    "song_usage": "<b>Verwendung:</b>\n\n<code>/song Songname</code>",
+    "song_unsupported": "Dieser Link wird nicht unterstützt. Sende einen gültigen YouTube-Link.",
+    "song_searching": "Suche...",
+    "song_not_found": "Keine Ergebnisse für deine Suche gefunden. Versuche andere Suchbegriffe.",
+    "song_live_unsupported": "Live-Streams können nicht als Audiodatei heruntergeladen werden.",
+    "song_too_long": "Dieser Titel überschreitet das Download-Limit von {0} Minuten.",
+    "song_downloading": "Wird heruntergeladen: <b>{0}</b>",
+    "song_download_failed": "Herunterladen des Titels fehlgeschlagen. Bitte versuche es später erneut.",
+    "song_uploading": "Wird hochgeladen...",
+    "song_send_failed": "Senden der Audiodatei fehlgeschlagen.",
+    "song_caption": "🎵 <b>{0}</b>",
+    "help_9": "🔍 Suche",
+    "help_song": "<u><b>Suchbefehle:</b></u>\n<i>Lade einen Titel direkt als Audiodatei herunter, ohne dem Video-Chat beizutreten.</i>\n\n/song [Songname/YouTube-URL/Antwort auf einen Link]: Sucht und lädt einen Titel als Audio herunter.\n\n<b>Beispiel:</b> <code>/song attention</code>"
 }
