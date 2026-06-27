@@ -30,6 +30,7 @@ class Config:
 
         self.AUTO_LEAVE: bool = getenv("AUTO_LEAVE", "False").lower() == "true"
         self.AUTO_END: bool = getenv("AUTO_END", "False").lower() == "true"
+        self.AUTO_END_DELAY: int = int(getenv("AUTO_END_DELAY", 300))
 
         self.THUMB_GEN: bool = getenv("THUMB_GEN", "True").lower() == "true"
         self.VIDEO_PLAY: bool = getenv("VIDEO_PLAY", "True").lower() == "true"
