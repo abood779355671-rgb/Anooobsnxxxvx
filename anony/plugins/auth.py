@@ -11,7 +11,7 @@ from anony import app, db, lang
 from anony.helpers import admin_check, is_admin, utils, cmd
 
 
-@app.on_message(cmd(["auth", "unauth"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["auth", "unauth", "تفويض", "إلغاء_تفويض"]) & filters.group & ~app.bl_users)
 @lang.language()
 @admin_check
 async def _auth(_, m: types.Message):
@@ -46,7 +46,7 @@ async def _authlist(_, m: types.Message):
 
 rel_hist = {}
 
-@app.on_message(cmd(["admincache", "reload"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["admincache", "reload", "تحديث_الادمن", "تحديث"]) & filters.group & ~app.bl_users)
 @lang.language()
 async def _admincache(_, m: types.Message):
     if m.from_user.id in rel_hist:
