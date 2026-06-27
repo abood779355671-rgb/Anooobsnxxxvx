@@ -9,7 +9,7 @@ from anony import app, db, lang
 from anony.helpers import admin_check, buttons, cmd
 
 
-@app.on_message(cmd(["lang", "language"]) & ~app.bl_users)
+@app.on_message(cmd(["lang", "language", "لغة", "اللغة"]) & ~app.bl_users)
 @lang.language()
 async def _lang(_, m: types.Message):
     current = await db.get_lang(m.chat.id)
