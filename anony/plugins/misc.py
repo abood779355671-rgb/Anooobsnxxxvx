@@ -11,6 +11,11 @@ from pyrogram import enums, errors, filters, types
 from anony import anon, app, config, db, lang, queue, tasks, userbot, yt
 from anony.helpers import buttons
 
+# Tracks, per chat_id, the timestamp (time.time()) at which the voice chat
+# was first observed to have no real listeners. Used by vc_watcher() to
+# implement a grace period before auto-leaving (see AUTO_END_DELAY).
+_empty_since: dict[int, float] = {}
+
 
 @app.on_message(filters.video_chat_started, group=19)
 @app.on_message(filters.video_chat_ended, group=20)
@@ -103,15 +108,36 @@ async def update_timer(length=10, sleep=12):
 async def vc_watcher(sleep=15):
     while True:
         await asyncio.sleep(sleep)
+
+        # Prune stale entries for chats that are no longer active, so the
+        # dict doesn't grow forever.
+        for chat_id in list(_empty_since):
+            if chat_id not in db.active_calls:
+                _empty_since.pop(chat_id, None)
+
         for chat_id in list(db.active_calls):
             client = await db.get_assistant(chat_id)
             media = queue.get_current(chat_id)
-            if not media:
-                continue
             participants = await client.get_participants(chat_id)
-            if len(participants) < 2 and media.time > 30:
-                _lang = await lang.get_lang(chat_id)
-                try:
+
+            if len(participants) >= 2:
+                # A real listener is present, reset the grace timer.
+                _empty_since.pop(chat_id, None)
+                continue
+
+            if chat_id not in _empty_since:
+                # First time we've seen this chat empty, start the timer
+                # but don't leave yet.
+                _empty_since[chat_id] = time.time()
+                continue
+
+            if time.time() - _empty_since[chat_id] < config.AUTO_END_DELAY:
+                continue
+
+            # Grace period elapsed with no listeners, leave the chat.
+            _lang = await lang.get_lang(chat_id)
+            try:
+                if media:
                     sent = await app.edit_message_reply_markup(
                         chat_id=chat_id,
                         message_id=media.message_id,
@@ -121,8 +147,14 @@ async def vc_watcher(sleep=15):
                     )
                     await anon.stop(chat_id)
                     await sent.reply_text(_lang["auto_left"])
-                except errors.MessageIdInvalid:
-                    pass
+                else:
+                    await anon.stop(chat_id)
+                    await app.send_message(chat_id, _lang["auto_left"])
+                _empty_since.pop(chat_id, None)
+            except errors.MessageIdInvalid:
+                # Leave didn't complete (stale message); leave the timer
+                # entry in place so it's retried on the next tick.
+                pass
 
 
 if config.AUTO_END:
