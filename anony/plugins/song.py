@@ -1,0 +1,161 @@
+# Copyright (c) 2025 AnonymousX1025
+# Licensed under the MIT License.
+# This file is part of AnonXMusic
+#
+# song.py — Search & Download Command (بحث / /song)
+# ───────────────────────────────────────────────────
+# Ported from the UltraMusic "بحث" feature. Searches YouTube and uploads the
+# track directly as an audio file in the chat. Completely independent from
+# the voice-chat playback system (/play) — it never joins the voice chat, it
+# just searches, downloads, and uploads the file.
+#
+# Command:
+#   /song <song name>            → text search, takes the first result
+#   /song <youtube url>          → direct download from the link
+#   reply to a message with a link + /song → downloads the replied link
+#
+# Notes:
+# - Reuses yt.valid() / yt.search() / yt.download() from anony/core/youtube.py
+#   (the exact same ArtistBots API — same API_URL/API_KEYS — already used by
+#   /play), so no new download backend is introduced.
+# - Anoob's yt.download() always returns a real .mp3 for audio downloads
+#   (ArtistBots serves audio as .mp3 directly), so unlike some other bots
+#   there's no need for an extra ffmpeg re-encode step here.
+
+import os
+import logging
+
+from pyrogram import filters, enums, types
+from PIL import Image
+
+from anony import app, config, lang, thumb, yt
+from anony.helpers import cmd, utils
+
+logger = logging.getLogger(__name__)
+
+
+def _prepare_thumb(path: str) -> str | None:
+    """
+    Resize a raw downloaded thumbnail to fit Telegram's strict thumb limits
+    (max 320x320, JPEG, well under 200KB), otherwise reply_audio() can fail
+    with a PHOTO_INVALID_DIMENSIONS-style error.
+    """
+    try:
+        with Image.open(path) as img:
+            img = img.convert("RGB")
+            img.thumbnail((320, 320))
+            out_path = path.rsplit(".", 1)[0] + "_thumb.jpg"
+            img.save(out_path, "JPEG", quality=85, optimize=True)
+        return out_path
+    except Exception as e:
+        logger.warning(f"⚠️ Failed to resize song thumbnail: {e}")
+        return None
+
+
+@app.on_message(cmd(["song", "بحث"]) & filters.group & ~app.bl_users)
+@lang.language()
+async def search_song(_, m: types.Message) -> None:
+    # Auto-delete the command message itself (consistent with /play).
+    try:
+        await m.delete()
+    except Exception:
+        pass
+
+    # ── Resolve the query: a link (typed or replied-to) or plain search text ──
+    url = utils.get_url(m)
+    if url and not yt.valid(url):
+        return await m.reply_text(m.lang["song_unsupported"])
+
+    if url:
+        query = url
+    elif len(m.command) > 1:
+        query = " ".join(m.command[1:])
+    else:
+        return await m.reply_text(m.lang["song_usage"])
+
+    status = await m.reply_text(m.lang["song_searching"])
+
+    # ── Search (via ArtistBots-backed yt.search, same as /play) ──
+    track = await yt.search(query, m.id)
+    if not track:
+        return await status.edit_text(m.lang["song_not_found"])
+
+    if track.is_live:
+        return await status.edit_text(m.lang["song_live_unsupported"])
+
+    if track.duration_sec and track.duration_sec > config.SONG_DOWNLOAD_LIMIT:
+        return await status.edit_text(
+            m.lang["song_too_long"].format(config.SONG_DOWNLOAD_LIMIT // 60)
+        )
+
+    await status.edit_text(m.lang["song_downloading"].format(track.title))
+
+    # ── Download audio via ArtistBots (same API_URL backend as /play) ──
+    try:
+        file_path = await yt.download(track.id)
+    except Exception as e:
+        logger.error(f"❌ yt.download failed for {track.id}: {e}")
+        file_path = None
+
+    if not file_path or not os.path.isfile(file_path):
+        return await status.edit_text(m.lang["song_download_failed"])
+
+    # ── Thumbnail (best effort — send without one if it fails) ──
+    thumb_path = None
+    if track.thumbnail:
+        try:
+            raw_thumb = await thumb.save_thumb(
+                f"cache/song_{track.id}.jpg", track.thumbnail
+            )
+            thumb_path = _prepare_thumb(raw_thumb)
+            if raw_thumb and os.path.isfile(raw_thumb) and raw_thumb != thumb_path:
+                try:
+                    os.remove(raw_thumb)
+                except OSError:
+                    pass
+        except Exception as e:
+            logger.warning(f"⚠️ Thumbnail download failed for {track.id}: {e}")
+            thumb_path = None
+
+    await status.edit_text(m.lang["song_uploading"])
+
+    # ── Send the audio file directly in the chat ──
+    async def _send(with_thumb: bool):
+        await app.send_chat_action(chat_id=m.chat.id, action=enums.ChatAction.UPLOAD_AUDIO)
+        await m.reply_audio(
+            file_path,
+            title=track.title,
+            performer=track.channel_name or "YouTube",
+            duration=track.duration_sec or 0,
+            thumb=thumb_path if with_thumb else None,
+            caption=m.lang["song_caption"].format(track.title),
+        )
+
+    try:
+        try:
+            await _send(with_thumb=True)
+        except Exception as e:
+            if thumb_path:
+                # Retry once without the thumbnail instead of failing outright.
+                logger.warning(
+                    f"⚠️ reply_audio with thumb failed for {track.id}, retrying without thumb: {e}"
+                )
+                await _send(with_thumb=False)
+            else:
+                raise
+    except Exception as e:
+        logger.error(f"❌ Failed to send song {track.id}: {e}")
+        return await status.edit_text(m.lang["song_send_failed"])
+    finally:
+        # Clean up the temporary thumbnail (the audio file stays cached in
+        # downloads/ so /song or /play can reuse it instantly next time).
+        if thumb_path and os.path.isfile(thumb_path):
+            try:
+                os.remove(thumb_path)
+            except OSError:
+                pass
+
+    try:
+        await status.delete()
+    except Exception:
+        pass
