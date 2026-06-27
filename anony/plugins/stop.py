@@ -9,7 +9,7 @@ from anony import anon, app, db, lang
 from anony.helpers import can_manage_vc, cmd
 
 
-@app.on_message(cmd(["end", "stop"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["end", "stop", "إيقاف", "وقف", "انهاء", "أنهِ"]) & filters.group & ~app.bl_users)
 @lang.language()
 @can_manage_vc
 async def _stop(_, m: types.Message):
