@@ -151,5 +151,18 @@
     "help_5": "Play",
     "help_6": "Queue",
     "help_7": "Stats",
-    "help_8": "Sudoers"
+    "help_8": "Sudoers",
+    "song_usage": "<b>Usage:</b>\n\n<code>/song song name</code>",
+    "song_unsupported": "This link is not supported. Please send a valid YouTube link.",
+    "song_searching": "Searching...",
+    "song_not_found": "No results found for your search. Try different keywords.",
+    "song_live_unsupported": "Live streams cannot be downloaded as audio files.",
+    "song_too_long": "This track exceeds the {0} minute download limit.",
+    "song_downloading": "Downloading: <b>{0}</b>",
+    "song_download_failed": "Failed to download the track. Please try again later.",
+    "song_uploading": "Uploading...",
+    "song_send_failed": "Failed to send the audio file.",
+    "song_caption": "🎵 <b>{0}</b>",
+    "help_9": "🔍 Search",
+    "help_song": "<u><b>Search commands:</b></u>\n<i>Download a track directly as an audio file without joining the video chat.</i>\n\n/song [song name/youtube url/reply to link]: Search and download a track as audio.\n\n<b>Example:</b> <code>/song attention</code>"
 }
