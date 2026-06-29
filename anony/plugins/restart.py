@@ -14,7 +14,7 @@ from anony import app, db, lang, stop
 from anony.helpers import cmd
 
 
-@app.on_message(cmd(["logs"]) & app.sudoers)
+@app.on_message(cmd(["logs", "سجلات"]) & app.sudoers)
 @lang.language()
 async def _logs(_, m: types.Message):
     sent = await m.reply_text(m.lang["log_fetch"])
@@ -28,7 +28,7 @@ async def _logs(_, m: types.Message):
     )
 
 
-@app.on_message(cmd(["logger"]) & app.sudoers)
+@app.on_message(cmd(["logger", "مسجل", "تسجيل"]) & app.sudoers)
 @lang.language()
 async def _logger(_, m: types.Message):
     if len(m.command) < 2:
@@ -44,7 +44,7 @@ async def _logger(_, m: types.Message):
         await m.reply_text(m.lang["logger_off"])
 
 
-@app.on_message(cmd(["restart"]) & app.sudoers)
+@app.on_message(cmd(["restart", "إعادة_تشغيل", "اعادة"]) & app.sudoers)
 @lang.language()
 async def _restart(_, m: types.Message):
     sent = await m.reply_text(m.lang["restarting"])
