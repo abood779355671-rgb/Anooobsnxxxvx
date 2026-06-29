@@ -35,7 +35,7 @@ async def play_hndlr(
     video: bool = False,
     url: str = None,
 ) -> None:
-    sent = await m.reply_text(m.lang["play_searching"])
+    sent = await m.reply_text("⚡")
     file = None
     mention = m.from_user.mention
     media = tg.get_media(m.reply_to_message) if m.reply_to_message else None
@@ -50,7 +50,7 @@ async def play_hndlr(
 
     elif url:
         if "playlist" in url:
-            await sent.edit_text(m.lang["playlist_fetch"])
+            await sent.edit_text("⚡")
             tracks = await yt.playlist(
                 config.PLAYLIST_LIMIT, mention, url, video
             )
@@ -120,7 +120,7 @@ async def play_hndlr(
         if Path(fname).exists():
             file.file_path = fname
         else:
-            await sent.edit_text(m.lang["play_downloading"])
+            await sent.edit_text("⚡")
             file.file_path = await yt.download(file.id, video=video)
 
     await anon.play_media(chat_id=m.chat.id, message=sent, media=file)
