@@ -9,7 +9,7 @@ from anony import app, db, lang
 from anony.helpers import cmd
 
 
-@app.on_message(cmd(["blacklist", "unblacklist", "whitelist"]) & app.sudoers)
+@app.on_message(cmd(["blacklist", "unblacklist", "whitelist", "حظر", "رفع_حظر", "قائمة_بيضاء"]) & app.sudoers)
 @lang.language()
 async def _blacklist(_, m: types.Message):
     if len(m.command) < 2:
