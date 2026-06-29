@@ -69,6 +69,36 @@ def can_manage_vc(func):
     return wrapper
 
 
+def can_manage_vc_strict(func):
+    @wraps(func)
+    async def wrapper(_, update: types.Message | types.CallbackQuery, *args, **kwargs):
+        chat_id = (
+            update.chat.id
+            if isinstance(update, types.Message)
+            else update.message.chat.id
+        )
+        user_id = update.from_user.id
+
+        if user_id in app.sudoers:
+            return await func(_, update, *args, **kwargs)
+
+        strict = await db.get_admin_vc(chat_id)
+
+        if not strict and await db.is_auth(chat_id, user_id):
+            return await func(_, update, *args, **kwargs)
+
+        admins = await db.get_admins(chat_id)
+        if user_id in admins:
+            return await func(_, update, *args, **kwargs)
+
+        if isinstance(update, types.Message):
+            return await update.reply_text(update.lang["user_no_perms"])
+        else:
+            return await update.answer(update.lang["user_no_perms"], show_alert=True)
+
+    return wrapper
+
+
 async def is_admin(chat_id: int, user_id: int) -> bool:
     if user_id in await db.get_admins(chat_id):
         return True
