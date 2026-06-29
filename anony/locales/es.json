@@ -136,6 +136,7 @@
     "paused": "Transmisión pausada",
     "cmd_delete": "Eliminar comando",
     "play_mode": "Solo para administradores",
+    "admin_vc_mode": "🎛️ Control de administrador",
     "playing": "Reproduciendo",
     "processing": "Procesando...",
     "replayed": "Transmisión reproducida de nuevo",
@@ -164,5 +165,15 @@
     "song_send_failed": "Error al enviar el archivo de audio.",
     "song_caption": "🎵 <b>{0}</b>",
     "help_9": "🔍 Buscar",
-    "help_song": "<u><b>Comandos de búsqueda:</b></u>\n<i>Descarga una canción directamente como archivo de audio sin unirte al chat de video.</i>\n\n/song [nombre de la canción/URL de YouTube/respuesta a un enlace]: Busca y descarga una canción como audio.\n\n<b>Ejemplo:</b> <code>/song attention</code>"
+    "help_song": "<u><b>Comandos de búsqueda:</b></u>\n<i>Descarga una canción directamente como archivo de audio sin unirte al chat de video.</i>\n\n/song [nombre de la canción/URL de YouTube/respuesta a un enlace]: Busca y descarga una canción como audio.\n\n<b>Ejemplo:</b> <code>/song attention</code>",
+    "vcinfo_fetching": "Obteniendo información del chat de voz...",
+    "vcinfo_error": "Ocurrió un error al obtener la información:\n<code>{0}</code>",
+    "vcinfo_empty": "No hay participantes en el chat de voz.",
+    "vcinfo_result": "<u><b>📊 Info del Chat de Voz</b></u>\n\n<b>Grupo:</b> {0}\n\n<b>👥 Participantes:</b> <code>{1}</code>\n<b>🔊 Hablando:</b> <code>{2}</code>\n<b>🔇 Silenciados:</b> <code>{3}</code>\n<b>📹 Video activo:</b> <code>{4}</code>\n<b>🖥 Presentando:</b> <code>{5}</code>\n<b>✋ Mano levantada:</b> <code>{6}</code>",
+    "assist_not_found": "No assistant has been assigned to this group yet.",
+    "assist_info": "<u><b>🤖 Current Assistant</b></u>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}\n<b>Connected:</b> {3}",
+    "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
+    "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
 }
