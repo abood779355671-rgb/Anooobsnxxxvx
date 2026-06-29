@@ -136,6 +136,7 @@
     "paused": "Stream pausiert",
     "cmd_delete": "Befehl löschen",
     "play_mode": "Nur-Admin-Wiedergabe",
+    "admin_vc_mode": "🎛️ Admin-Steuerung",
     "playing": "Wiedergabe läuft",
     "processing": "Wird verarbeitet...",
     "replayed": "Stream erneut abgespielt",
@@ -164,5 +165,15 @@
     "song_send_failed": "Senden der Audiodatei fehlgeschlagen.",
     "song_caption": "🎵 <b>{0}</b>",
     "help_9": "🔍 Suche",
-    "help_song": "<u><b>Suchbefehle:</b></u>\n<i>Lade einen Titel direkt als Audiodatei herunter, ohne dem Video-Chat beizutreten.</i>\n\n/song [Songname/YouTube-URL/Antwort auf einen Link]: Sucht und lädt einen Titel als Audio herunter.\n\n<b>Beispiel:</b> <code>/song attention</code>"
+    "help_song": "<u><b>Suchbefehle:</b></u>\n<i>Lade einen Titel direkt als Audiodatei herunter, ohne dem Video-Chat beizutreten.</i>\n\n/song [Songname/YouTube-URL/Antwort auf einen Link]: Sucht und lädt einen Titel als Audio herunter.\n\n<b>Beispiel:</b> <code>/song attention</code>",
+    "vcinfo_fetching": "Sprachanruf-Informationen werden abgerufen...",
+    "vcinfo_error": "Fehler beim Abrufen der Informationen:\n<code>{0}</code>",
+    "vcinfo_empty": "Keine Teilnehmer im Sprachanruf gefunden.",
+    "vcinfo_result": "<u><b>📊 Sprachanruf-Informationen</b></u>\n\n<b>Gruppe:</b> {0}\n\n<b>👥 Teilnehmer:</b> <code>{1}</code>\n<b>🔊 Sprechend:</b> <code>{2}</code>\n<b>🔇 Stummgeschaltet:</b> <code>{3}</code>\n<b>📹 Video aktiv:</b> <code>{4}</code>\n<b>🖥 Präsentation:</b> <code>{5}</code>\n<b>✋ Hand gehoben:</b> <code>{6}</code>",
+    "assist_not_found": "No assistant has been assigned to this group yet.",
+    "assist_info": "<u><b>🤖 Current Assistant</b></u>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}\n<b>Connected:</b> {3}",
+    "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
+    "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
 }
