@@ -136,6 +136,7 @@
     "paused": "Stream paused",
     "cmd_delete": "Command delete",
     "play_mode": "Admin only play",
+    "admin_vc_mode": "🎛️ Admin control",
     "playing": "Playing",
     "processing": "Processing...",
     "replayed": "Stream replayed",
@@ -164,5 +165,15 @@
     "song_send_failed": "Failed to send the audio file.",
     "song_caption": "🎵 <b>{0}</b>",
     "help_9": "🔍 Search",
-    "help_song": "<u><b>Search commands:</b></u>\n<i>Download a track directly as an audio file without joining the video chat.</i>\n\n/song [song name/youtube url/reply to link]: Search and download a track as audio.\n\n<b>Example:</b> <code>/song attention</code>"
+    "help_song": "<u><b>Search commands:</b></u>\n<i>Download a track directly as an audio file without joining the video chat.</i>\n\n/song [song name/youtube url/reply to link]: Search and download a track as audio.\n\n<b>Example:</b> <code>/song attention</code>",
+    "vcinfo_fetching": "Fetching voice chat info...",
+    "vcinfo_error": "An error occurred while fetching info:\n<code>{0}</code>",
+    "vcinfo_empty": "No participants found in the voice chat.",
+    "vcinfo_result": "<u><b>📊 Voice Chat Info</b></u>\n\n<b>Group:</b> {0}\n\n<b>👥 Participants:</b> <code>{1}</code>\n<b>🔊 Speaking:</b> <code>{2}</code>\n<b>🔇 Muted:</b> <code>{3}</code>\n<b>📹 Video On:</b> <code>{4}</code>\n<b>🖥 Presenting:</b> <code>{5}</code>\n<b>✋ Raised Hand:</b> <code>{6}</code>",
+    "assist_not_found": "No assistant has been assigned to this group yet.",
+    "assist_info": "<u><b>🤖 Current Assistant</b></u>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}\n<b>Connected:</b> {3}",
+    "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
+    "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
 }
