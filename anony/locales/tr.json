@@ -136,6 +136,7 @@
     "paused": "Yayın duraklatıldı",
     "cmd_delete": "Komut sil",
     "play_mode": "Sadece yönetici oynatabilir",
+    "admin_vc_mode": "🎛️ Yönetici kontrolü",
     "playing": "Oynatılıyor",
     "processing": "İşleniyor...",
     "replayed": "Yayın yeniden başlatıldı",
@@ -164,5 +165,15 @@
     "song_send_failed": "Ses dosyası gönderilemedi.",
     "song_caption": "🎵 <b>{0}</b>",
     "help_9": "🔍 Arama",
-    "help_song": "<u><b>Arama komutları:</b></u>\n<i>Görüntülü sohbete katılmadan bir parçayı doğrudan ses dosyası olarak indirin.</i>\n\n/song [şarkı adı/youtube bağlantısı/bağlantıya yanıt]: Bir parçayı arayın ve ses olarak indirin.\n\n<b>Örnek:</b> <code>/song attention</code>"
+    "help_song": "<u><b>Arama komutları:</b></u>\n<i>Görüntülü sohbete katılmadan bir parçayı doğrudan ses dosyası olarak indirin.</i>\n\n/song [şarkı adı/youtube bağlantısı/bağlantıya yanıt]: Bir parçayı arayın ve ses olarak indirin.\n\n<b>Örnek:</b> <code>/song attention</code>",
+    "vcinfo_fetching": "Sesli sohbet bilgileri alınıyor...",
+    "vcinfo_error": "Bilgi alınırken hata oluştu:\n<code>{0}</code>",
+    "vcinfo_empty": "Sesli sohbette katılımcı bulunamadı.",
+    "vcinfo_result": "<u><b>📊 Sesli Sohbet Bilgileri</b></u>\n\n<b>Grup:</b> {0}\n\n<b>👥 Katılımcılar:</b> <code>{1}</code>\n<b>🔊 Konuşuyor:</b> <code>{2}</code>\n<b>🔇 Sessize alındı:</b> <code>{3}</code>\n<b>📹 Video açık:</b> <code>{4}</code>\n<b>🖥 Sunum yapıyor:</b> <code>{5}</code>\n<b>✋ El kaldırıldı:</b> <code>{6}</code>",
+    "assist_not_found": "No assistant has been assigned to this group yet.",
+    "assist_info": "<u><b>🤖 Current Assistant</b></u>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}\n<b>Connected:</b> {3}",
+    "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
+    "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
 }
