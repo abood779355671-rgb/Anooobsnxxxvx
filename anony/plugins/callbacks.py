@@ -126,14 +126,26 @@ async def _controls(_, query: types.CallbackQuery):
 @app.on_callback_query(filters.regex("help") & ~app.bl_users)
 @lang.language()
 async def _help(_, query: types.CallbackQuery):
+    from anony import config
     data = query.data.split()
+
+    # زر "قائمة الأوامر" من رسالة الستارت — يرسل رسالة صورة جديدة
     if len(data) == 1:
-        return await query.answer(url=f"https://t.me/{app.username}?start=help")
+        await query.answer()
+        return await query.message.reply_photo(
+            photo=config.START_IMG,
+            caption=query.lang["help_menu"],
+            reply_markup=buttons.help_markup(query.lang),
+            quote=True,
+        )
 
     if data[1] == "back":
-        return await query.edit_message_text(
-            text=query.lang["help_menu"], reply_markup=buttons.help_markup(query.lang)
-        )
+        # حذف رسالة قائمة الأوامر والرجوع
+        try:
+            await query.message.delete()
+        except Exception:
+            pass
+        return
     elif data[1] == "close":
         try:
             await query.message.delete()
@@ -141,10 +153,17 @@ async def _help(_, query: types.CallbackQuery):
         except Exception:
             return
 
-    await query.edit_message_text(
-        text=query.lang[f"help_{data[1]}"],
-        reply_markup=buttons.help_markup(query.lang, True),
-    )
+    # عرض تفاصيل القسم المختار مع تعديل الصورة
+    try:
+        await query.edit_message_caption(
+            caption=query.lang[f"help_{data[1]}"],
+            reply_markup=buttons.help_markup(query.lang, True),
+        )
+    except Exception:
+        await query.edit_message_text(
+            text=query.lang[f"help_{data[1]}"],
+            reply_markup=buttons.help_markup(query.lang, True),
+        )
 
 
 @app.on_callback_query(filters.regex("settings") & ~app.bl_users)
