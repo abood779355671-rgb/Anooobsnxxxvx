@@ -10,6 +10,10 @@ from pyrogram import enums, errors, types
 from anony import app, config, db, logger, queue, yt
 from anony.helpers import utils
 
+import time
+
+_member_cache: dict = {}
+
 
 def checkUB(play):
     async def wrapper(_, m: types.Message):
@@ -41,7 +45,8 @@ def checkUB(play):
             return await m.reply_text(m.lang["play_not_found"].format(config.SUPPORT_CHAT))
         m3u8 = url and not yt.valid(url)
 
-        play_mode = await db.get_play_mode(chat_id)
+        settings = await db.get_play_settings(chat_id)
+        play_mode = settings["play_mode"]
         if play_mode or force:
             adminlist = await db.get_admins(chat_id)
             if (
@@ -54,7 +59,13 @@ def checkUB(play):
         if chat_id not in db.active_calls:
             client = await db.get_client(chat_id)
             try:
-                member = await app.get_chat_member(chat_id, client.id)
+                _cache_key = (chat_id, client.id)
+                _now = time.time()
+                if _cache_key in _member_cache and _now - _member_cache[_cache_key][1] < 600:
+                    member = _member_cache[_cache_key][0]
+                else:
+                    member = await app.get_chat_member(chat_id, client.id)
+                    _member_cache[_cache_key] = (member, _now)
                 if member.status in [
                     enums.ChatMemberStatus.BANNED,
                     enums.ChatMemberStatus.RESTRICTED,
@@ -118,7 +129,7 @@ def checkUB(play):
                 await umm.delete()
                 await client.resolve_peer(chat_id)
 
-        if await db.get_cmd_delete(chat_id):
+        if settings["cmd_delete"]:
             try:
                 await m.delete()
             except Exception:
