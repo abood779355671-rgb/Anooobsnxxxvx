@@ -21,7 +21,7 @@ def playlist_to_queue(chat_id: int, tracks: list) -> str:
     return text
 
 @app.on_message(
-    cmd(["play", "playforce", "vplay", "vplayforce", "تشغيل", "شغل", "شغّل"])
+    cmd(["play", "playforce", "vplay", "vplayforce", "تشغيل", "شغل", "تشغيل_فيديو", "تشغيل_فوري", "فيديو"])
     & filters.group
     & ~app.bl_users
 )
@@ -35,7 +35,7 @@ async def play_hndlr(
     video: bool = False,
     url: str = None,
 ) -> None:
-    sent = await m.reply_text(m.lang["play_searching"])
+    sent = await m.reply_text("⚡")
     file = None
     mention = m.from_user.mention
     media = tg.get_media(m.reply_to_message) if m.reply_to_message else None
@@ -50,7 +50,7 @@ async def play_hndlr(
 
     elif url:
         if "playlist" in url:
-            await sent.edit_text(m.lang["playlist_fetch"])
+            await sent.edit_text("⚡")
             tracks = await yt.playlist(
                 config.PLAYLIST_LIMIT, mention, url, video
             )
@@ -70,8 +70,7 @@ async def play_hndlr(
             )
 
     elif len(m.command) >= 2:
-        AR_MODE = ["فيديو", "فوري"]
-        query = " ".join(w for w in m.command[1:] if w not in AR_MODE)
+        query = " ".join(m.command[1:])
         file = await yt.search(query, sent.id, video=video)
         if not file:
             return await sent.edit_text(
@@ -121,8 +120,12 @@ async def play_hndlr(
         if Path(fname).exists():
             file.file_path = fname
         else:
-            await sent.edit_text(m.lang["play_downloading"])
+            await sent.edit_text("⚡")
             file.file_path = await yt.download(file.id, video=video)
+            if not file.file_path:
+                return await sent.edit_text(
+                    m.lang["play_not_found"].format(config.SUPPORT_CHAT)
+                )
 
     await anon.play_media(chat_id=m.chat.id, message=sent, media=file)
     if not tracks:
