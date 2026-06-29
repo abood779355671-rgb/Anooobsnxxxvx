@@ -11,7 +11,7 @@ from anony import app, db, lang, queue
 from anony.helpers import cmd
 
 
-@app.on_message(cmd(["ac", "activevc"]) & app.sudoers)
+@app.on_message(cmd(["ac", "activevc", "نشط", "البث_النشط"]) & app.sudoers)
 @lang.language()
 async def _activevc(_, m: types.Message):
     if not db.active_calls:
