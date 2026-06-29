@@ -93,7 +93,7 @@ def checkUB(play):
                             m.lang["play_invite_error"].format(type(ex).__name__)
                         )
 
-                umm = await m.reply_text("⚡")
+                umm = await m.reply_text(m.lang["play_invite"].format(app.name))
                 await asyncio.sleep(2)
                 try:
                     await client.join_chat(invite_link)
