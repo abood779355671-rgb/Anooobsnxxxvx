@@ -12,8 +12,9 @@ from anony.helpers import buttons, utils, cmd
 @app.on_message(cmd(["help", "مساعدة", "مساعده"]) & filters.private & ~app.bl_users)
 @lang.language()
 async def _help(_, m: types.Message):
-    await m.reply_text(
-        text=m.lang["help_menu"],
+    await m.reply_photo(
+        photo=config.START_IMG,
+        caption=m.lang["help_menu"],
         reply_markup=buttons.help_markup(m.lang),
         quote=True,
     )
@@ -30,9 +31,9 @@ async def start(_, message: types.Message):
 
     private = message.chat.type == enums.ChatType.PRIVATE
     _text = (
-        message.lang["start_pm"].format(message.from_user.first_name, app.name)
+        message.lang["start_pm"].format(message.from_user.first_name, app.name, message.from_user.id, app.username)
         if private
-        else message.lang["start_gp"].format(app.name)
+        else message.lang["start_gp"].format(app.name, app.username)
     )
 
     key = buttons.start_key(message.lang, private)
