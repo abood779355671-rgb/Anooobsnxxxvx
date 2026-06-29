@@ -32,7 +32,10 @@ def checkUB(play):
         force = m.command[0].endswith("force") or (
             len(m.command) > 1 and "-f" in m.command[1]
         )
-        video = m.command[0][0] == "v" and config.VIDEO_PLAY
+        video_cmds = ("vplay", "vplayforce", "تشغيل_فيديو", "فيديو")
+        video = (
+            m.command[0][0] == "v" or m.command[0] in video_cmds
+        ) and config.VIDEO_PLAY
         url = utils.get_url(m)
         if url and yt.invalid(url):
             return await m.reply_text(m.lang["play_not_found"].format(config.SUPPORT_CHAT))
