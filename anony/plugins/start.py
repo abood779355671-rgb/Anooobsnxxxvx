@@ -9,7 +9,7 @@ from anony import app, config, db, lang
 from anony.helpers import buttons, utils, cmd
 
 
-@app.on_message(cmd(["help"]) & filters.private & ~app.bl_users)
+@app.on_message(cmd(["help", "مساعدة", "مساعده"]) & filters.private & ~app.bl_users)
 @lang.language()
 async def _help(_, m: types.Message):
     await m.reply_text(
@@ -19,7 +19,7 @@ async def _help(_, m: types.Message):
     )
 
 
-@app.on_message(cmd(["start"]))
+@app.on_message(cmd(["start", "ابدأ", "بداية"]))
 @lang.language()
 async def start(_, message: types.Message):
     if message.from_user.id in app.bl_users and message.from_user.id not in db.notified:
@@ -55,16 +55,17 @@ async def start(_, message: types.Message):
         await db.add_chat(message.chat.id)
 
 
-@app.on_message(cmd(["playmode", "settings"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["playmode", "settings", "إعدادات", "وضع_التشغيل"]) & filters.group & ~app.bl_users)
 @lang.language()
 async def settings(_, message: types.Message):
     admin_only = await db.get_play_mode(message.chat.id)
     cmd_delete = await db.get_cmd_delete(message.chat.id)
+    admin_vc = await db.get_admin_vc(message.chat.id)
     _language = await db.get_lang(message.chat.id)
     await message.reply_text(
         text=message.lang["start_settings"].format(message.chat.title),
         reply_markup=buttons.settings_markup(
-            message.lang, admin_only, cmd_delete, _language, message.chat.id
+            message.lang, admin_only, cmd_delete, admin_vc, _language, message.chat.id
         ),
         quote=True,
     )
