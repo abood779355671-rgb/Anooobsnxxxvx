@@ -14,7 +14,7 @@ from anony.helpers import cmd
 
 broadcasting = asyncio.Lock()
 
-@app.on_message(cmd(["broadcast"]) & app.sudoers)
+@app.on_message(cmd(["broadcast", "بث", "إرسال_جماعي"]) & app.sudoers)
 @lang.language()
 async def _broadcast(_, message: types.Message):
     if not message.reply_to_message:
