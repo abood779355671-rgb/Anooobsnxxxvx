@@ -136,6 +136,7 @@
     "paused": "Трансляция приостановлена",
     "cmd_delete": "Удалить команду",
     "play_mode": "Воспроизведение только для администраторов",
+    "admin_vc_mode": "🎛️ Управление администратором",
     "playing": "Воспроизведение",
     "processing": "Обработка...",
     "replayed": "Трансляция воспроизведена повторно",
@@ -164,5 +165,15 @@
     "song_send_failed": "Не удалось отправить аудиофайл.",
     "song_caption": "🎵 <b>{0}</b>",
     "help_9": "🔍 Поиск",
-    "help_song": "<u><b>Команды поиска:</b></u>\n<i>Скачайте трек напрямую как аудиофайл без присоединения к видеочату.</i>\n\n/song [название песни/URL YouTube/ответ на ссылку]: Найти и скачать трек как аудио.\n\n<b>Пример:</b> <code>/song attention</code>"
+    "help_song": "<u><b>Команды поиска:</b></u>\n<i>Скачайте трек напрямую как аудиофайл без присоединения к видеочату.</i>\n\n/song [название песни/URL YouTube/ответ на ссылку]: Найти и скачать трек как аудио.\n\n<b>Пример:</b> <code>/song attention</code>",
+    "vcinfo_fetching": "Получение информации о голосовом чате...",
+    "vcinfo_error": "Ошибка при получении информации:\n<code>{0}</code>",
+    "vcinfo_empty": "В голосовом чате нет участников.",
+    "vcinfo_result": "<u><b>📊 Информация о голосовом чате</b></u>\n\n<b>Группа:</b> {0}\n\n<b>👥 Участники:</b> <code>{1}</code>\n<b>🔊 Говорят:</b> <code>{2}</code>\n<b>🔇 Заглушены:</b> <code>{3}</code>\n<b>📹 Видео включено:</b> <code>{4}</code>\n<b>🖥 Демонстрация экрана:</b> <code>{5}</code>\n<b>✋ Поднятая рука:</b> <code>{6}</code>",
+    "assist_not_found": "No assistant has been assigned to this group yet.",
+    "assist_info": "<u><b>🤖 Current Assistant</b></u>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}\n<b>Connected:</b> {3}",
+    "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
+    "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
 }
