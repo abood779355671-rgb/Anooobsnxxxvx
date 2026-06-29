@@ -136,6 +136,7 @@
     "paused": "流已暂停",
     "cmd_delete": "删除指令",
     "play_mode": "仅限管理员播放",
+    "admin_vc_mode": "🎛️ 管理员控制",
     "playing": "正在播放",
     "processing": "正在处理...",
     "replayed": "流已重播",
@@ -164,5 +165,15 @@
     "song_send_failed": "发送音频文件失败。",
     "song_caption": "🎵 <b>{0}</b>",
     "help_9": "🔍 搜索",
-    "help_song": "<u><b>搜索命令: </b></u>\n<i>无需加入视频聊天即可直接将曲目下载为音频文件。</i>\n\n/song [歌曲名称/youtube链接/回复链接]: 搜索并将曲目下载为音频。\n\n<b>示例: </b> <code>/song attention</code>"
+    "help_song": "<u><b>搜索命令: </b></u>\n<i>无需加入视频聊天即可直接将曲目下载为音频文件。</i>\n\n/song [歌曲名称/youtube链接/回复链接]: 搜索并将曲目下载为音频。\n\n<b>示例: </b> <code>/song attention</code>",
+    "vcinfo_fetching": "正在获取语音聊天信息...",
+    "vcinfo_error": "获取信息时发生错误:\n<code>{0}</code>",
+    "vcinfo_empty": "语音聊天中没有参与者。",
+    "vcinfo_result": "<u><b>📊 语音聊天信息</b></u>\n\n<b>群组:</b> {0}\n\n<b>👥 参与者:</b> <code>{1}</code>\n<b>🔊 发言中:</b> <code>{2}</code>\n<b>🔇 已静音:</b> <code>{3}</code>\n<b>📹 视频开启:</b> <code>{4}</code>\n<b>🖥 共享屏幕:</b> <code>{5}</code>\n<b>✋ 举手:</b> <code>{6}</code>",
+    "assist_not_found": "No assistant has been assigned to this group yet.",
+    "assist_info": "<u><b>🤖 Current Assistant</b></u>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}\n<b>Connected:</b> {3}",
+    "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
+    "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
 }
