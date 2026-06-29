@@ -2,7 +2,6 @@
 # Licensed under the MIT License.
 # This file is part of AnonXMusic
 
-
 from pyrogram import filters, types
 
 from anony import anon, app, db, lang
@@ -18,7 +17,14 @@ async def _stop(_, m: types.Message):
 
     call = await db.get_call(m.chat.id)
     await anon.stop(m.chat.id)
+
     if not call:
         return await m.reply_text(m.lang["not_playing"])
 
-    await m.reply_text(m.lang["play_stopped"].format(m.from_user.mention))
+    delete_btn = types.InlineKeyboardMarkup(
+        [[types.InlineKeyboardButton(text=m.lang["delete_msg"], callback_data="delete_this")]]
+    )
+    await m.reply_text(
+        m.lang["play_stopped"].format(m.from_user.mention),
+        reply_markup=delete_btn,
+    )
