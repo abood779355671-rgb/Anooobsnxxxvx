@@ -6,12 +6,12 @@
 from pyrogram import filters, types
 
 from anony import anon, app, db, lang
-from anony.helpers import can_manage_vc, cmd
+from anony.helpers import can_manage_vc_strict, cmd
 
 
-@app.on_message(cmd(["skip", "next", "تخطي", "التالي", "تخطِّ"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["skip", "next", "تخطي", "التالي"]) & filters.group & ~app.bl_users)
 @lang.language()
-@can_manage_vc
+@can_manage_vc_strict
 async def _skip(_, m: types.Message):
     if not await db.get_call(m.chat.id):
         return await m.reply_text(m.lang["not_playing"])
