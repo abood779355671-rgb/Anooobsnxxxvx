@@ -64,6 +64,9 @@ class YouTube:
         # Limit concurrent downloads (prevents bandwidth saturation)
         self._download_semaphore = asyncio.Semaphore(5)
 
+        # Search result cache (max 50 entries, FIFO eviction)
+        self._search_cache: dict = {}
+
     # ── URL helpers ────────────────────────────────────────────────────────────
 
     def valid(self, url: str) -> bool:
@@ -123,49 +126,59 @@ class YouTube:
         params = {"url": vid, "type": download_type, "api_key": api_key}
         masked = api_key[:8] + "..." if len(api_key) > 8 else "***"
 
-        try:
-            session = await self._get_api_session()
-            endpoint = f"{base_url.rstrip('/')}/download"
-            logger.debug(f"ArtistBots [{masked}] → {endpoint} ({download_type})")
+        for attempt in range(2):
+            try:
+                session = await self._get_api_session()
+                endpoint = f"{base_url.rstrip('/')}/download"
+                logger.debug(f"ArtistBots [{masked}] → {endpoint} ({download_type})")
 
-            async with session.get(
-                endpoint,
-                params=params,
-                timeout=aiohttp.ClientTimeout(total=300),
-            ) as resp:
-                if resp.status != 200:
-                    logger.warning(
-                        f"⚠️ ArtistBots returned HTTP {resp.status} for {vid} (key {masked})"
-                    )
-                    return None
-                with open(out_path, "wb") as f:
-                    async for chunk in resp.content.iter_chunked(_CHUNK_SIZE):
-                        if chunk:
-                            f.write(chunk)
+                async with session.get(
+                    endpoint,
+                    params=params,
+                    timeout=aiohttp.ClientTimeout(total=60),
+                ) as resp:
+                    if resp.status != 200:
+                        logger.warning(
+                            f"⚠️ ArtistBots returned HTTP {resp.status} for {vid} (key {masked})"
+                        )
+                        return None
+                    with open(out_path, "wb") as f:
+                        async for chunk in resp.content.iter_chunked(_CHUNK_SIZE):
+                            if chunk:
+                                f.write(chunk)
 
-            if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
-                logger.info(f"✅ {download_type.capitalize()} downloaded via ArtistBots: {vid}")
-                return out_path
+                if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
+                    logger.info(f"✅ {download_type.capitalize()} downloaded via ArtistBots: {vid}")
+                    return out_path
 
-            if os.path.exists(out_path):
-                os.remove(out_path)
-            return None
+                if os.path.exists(out_path):
+                    os.remove(out_path)
+                return None
 
-        except asyncio.TimeoutError:
-            logger.error(f"⏰ ArtistBots timeout for {vid} (key {masked})")
-        except aiohttp.ClientError as e:
-            logger.error(f"🌐 ArtistBots client error for {vid}: {e}")
-        except Exception as e:
-            logger.error(f"❌ ArtistBots download failed for {vid}: {type(e).__name__}: {e}")
+            except asyncio.TimeoutError:
+                logger.error(f"⏰ ArtistBots timeout for {vid} (key {masked})")
+            except aiohttp.ClientError as e:
+                logger.error(f"🌐 ArtistBots client error for {vid}: {e}")
+            except Exception as e:
+                logger.error(f"❌ ArtistBots download failed for {vid}: {type(e).__name__}: {e}")
+
+            if attempt == 0:
+                logger.info(f"🔄 Retrying ArtistBots download for {vid}...")
         return None
 
     # ── Public API ─────────────────────────────────────────────────────────────
 
     async def search(self, query: str, m_id: int, video: bool = False) -> Optional[Track]:
         """Search YouTube via py_yt."""
+        cache_key = f"{query}:{video}"
+        if cache_key in self._search_cache:
+            cached_track = self._search_cache[cache_key]
+            cached_track.message_id = m_id
+            return cached_track
+
         try:
             _search = VideosSearch(query, limit=1, with_live=False)
-            results = await asyncio.wait_for(_search.next(), timeout=20)
+            results = await asyncio.wait_for(_search.next(), timeout=8)
         except asyncio.TimeoutError:
             logger.warning(f"⏰ YouTube search timed out: {query}")
             return None
@@ -180,7 +193,7 @@ class YouTube:
         duration = data.get("duration")
         is_live = duration is None or duration == "LIVE"
 
-        return Track(
+        track = Track(
             id=data.get("id"),
             channel_name=data.get("channel", {}).get("name"),
             duration=duration if not is_live else "LIVE",
@@ -193,6 +206,11 @@ class YouTube:
             is_live=is_live,
             video=video,
         )
+
+        if len(self._search_cache) >= 50:
+            self._search_cache.pop(next(iter(self._search_cache)))
+        self._search_cache[cache_key] = track
+        return track
 
     async def playlist(self, limit: int, user: str, url: str, video: bool = False) -> list:
         """Extract tracks from a YouTube playlist URL."""
