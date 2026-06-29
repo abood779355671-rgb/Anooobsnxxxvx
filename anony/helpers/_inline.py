@@ -53,28 +53,24 @@ class Inline:
             rows = [
                 [
                     self.ikb(text=_lang["back"], callback_data="help back"),
-                    self.ikb(text=_lang["close"], callback_data="help close"),
                 ]
             ]
         else:
-            cbs = ["admins", "auth", "blist", "lang", "ping", "play", "queue", "stats", "sudo", "song"]
-            btn_labels = {
-                "admins": "help_btn_admins",
-                "auth":   "help_btn_auth",
-                "blist":  "help_btn_blist",
-                "lang":   "help_btn_lang",
-                "ping":   "help_btn_ping",
-                "play":   "help_btn_play",
-                "queue":  "help_btn_queue",
-                "stats":  "help_btn_stats",
-                "sudo":   "help_btn_sudo",
-                "song":   "help_btn_song",
-            }
-            buttons = [
-                self.ikb(text=_lang.get(btn_labels[cb], cb), callback_data=f"help {cb}")
-                for cb in cbs
+            # 6 buttons in 3 rows of 2, matching screenshot layout
+            pairs = [
+                ("play",  "help_btn_play",  "admins", "help_btn_admins"),
+                ("queue", "help_btn_queue", "auth",   "help_btn_auth"),
+                ("song",  "help_btn_song",  "sudo",   "help_btn_sudo"),
             ]
-            rows = [buttons[i : i + 3] for i in range(0, len(buttons), 3)]
+            rows = []
+            for cb1, lbl1, cb2, lbl2 in pairs:
+                rows.append([
+                    self.ikb(text=_lang.get(lbl2, cb2), callback_data=f"help {cb2}"),
+                    self.ikb(text=_lang.get(lbl1, cb1), callback_data=f"help {cb1}"),
+                ])
+            rows.append([
+                self.ikb(text=_lang["back"], callback_data="help back"),
+            ])
 
         return self.ikm(rows)
 
@@ -160,6 +156,7 @@ class Inline:
     def start_key(
         self, lang: dict, private: bool = False
     ) -> types.InlineKeyboardMarkup:
+        owner_url = f"https://t.me/{config.OWNER_USERNAME}" if config.OWNER_USERNAME else f"tg://user?id={config.OWNER_ID}"
         rows = [
             [
                 self.ikb(
@@ -167,23 +164,17 @@ class Inline:
                     url=f"https://t.me/{app.username}?startgroup=true",
                 )
             ],
-            [self.ikb(text=lang["help"], callback_data="help")],
             [
-                self.ikb(text=lang["support"], url=config.SUPPORT_CHAT),
                 self.ikb(text=lang["channel"], url=config.SUPPORT_CHANNEL),
             ],
+            [
+                self.ikb(text=lang.get("help", "≡ ⁝ قائمة الاوامر ⁝ ≡"), callback_data="help"),
+            ],
+            [
+                self.ikb(text=lang["language"], callback_data="language"),
+                self.ikb(text=lang.get("owner_btn", "👤 OWNER"), url=owner_url),
+            ],
         ]
-        if private:
-            rows += [
-                [
-                    self.ikb(
-                        text=lang["source"],
-                        url="https://github.com/AnonymousX1025/AnonXMusic",
-                    )
-                ]
-            ]
-        else:
-            rows += [[self.ikb(text=lang["language"], callback_data="language")]]
         return self.ikm(rows)
 
     def yt_key(self, link: str) -> types.InlineKeyboardMarkup:
