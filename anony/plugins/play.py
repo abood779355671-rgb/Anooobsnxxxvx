@@ -122,6 +122,10 @@ async def play_hndlr(
         else:
             await sent.edit_text("⚡")
             file.file_path = await yt.download(file.id, video=video)
+            if not file.file_path:
+                return await sent.edit_text(
+                    m.lang["play_not_found"].format(config.SUPPORT_CHAT)
+                )
 
     await anon.play_media(chat_id=m.chat.id, message=sent, media=file)
     if not tracks:
