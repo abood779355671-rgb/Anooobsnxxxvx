@@ -25,36 +25,25 @@ class Inline:
         remove: bool = False,
     ) -> types.InlineKeyboardMarkup:
         keyboard = []
+        if status:
+            keyboard.append(
+                [self.ikb(text=status, callback_data=f"controls status {chat_id}")]
+            )
+        elif timer:
+            keyboard.append(
+                [self.ikb(text=timer, callback_data=f"controls status {chat_id}")]
+            )
 
         if not remove:
-            # صف 1 — أزرار التحكم الرئيسية
             keyboard.append(
                 [
-                    self.ikb(text="◉", callback_data=f"controls resume {chat_id}"),
-                    self.ikb(text="◎", callback_data=f"controls pause {chat_id}"),
-                    self.ikb(text="↺", callback_data=f"controls replay {chat_id}"),
-                    self.ikb(text="◈", callback_data=f"controls skip {chat_id}"),
-                    self.ikb(text="⊘", callback_data=f"controls stop {chat_id}"),
+                    self.ikb(text="▷", callback_data=f"controls resume {chat_id}"),
+                    self.ikb(text="II", callback_data=f"controls pause {chat_id}"),
+                    self.ikb(text="⥁", callback_data=f"controls replay {chat_id}"),
+                    self.ikb(text="‣‣I", callback_data=f"controls skip {chat_id}"),
+                    self.ikb(text="▢", callback_data=f"controls stop {chat_id}"),
                 ]
             )
-            # صف 2 — seek ±15 ثانية مع الوقت في المنتصف
-            seek_mid = status or timer or "00:00"
-            keyboard.append(
-                [
-                    self.ikb(text="→ 15", callback_data=f"controls seekf {chat_id}"),
-                    self.ikb(text=seek_mid, callback_data=f"controls status {chat_id}"),
-                    self.ikb(text="15 ←", callback_data=f"controls seekb {chat_id}"),
-                ]
-            )
-            # صف 3 — إعدادات
-            keyboard.append(
-                [self.ikb(text="⚙️", callback_data=f"controls status {chat_id}")]
-            )
-            # صف 4 — إخفاء (أحمر)
-            keyboard.append(
-                [self.ikb(text="🚫", callback_data=f"controls hide {chat_id}")]
-            )
-
         return self.ikm(keyboard)
 
     def help_markup(
@@ -64,24 +53,28 @@ class Inline:
             rows = [
                 [
                     self.ikb(text=_lang["back"], callback_data="help back"),
+                    self.ikb(text=_lang["close"], callback_data="help close"),
                 ]
             ]
         else:
-            # 6 buttons in 3 rows of 2, matching screenshot layout
-            pairs = [
-                ("play",  "help_btn_play",  "admins", "help_btn_admins"),
-                ("queue", "help_btn_queue", "auth",   "help_btn_auth"),
-                ("song",  "help_btn_song",  "sudo",   "help_btn_sudo"),
+            cbs = ["admins", "auth", "blist", "lang", "ping", "play", "queue", "stats", "sudo", "song"]
+            btn_labels = {
+                "admins": "help_btn_admins",
+                "auth":   "help_btn_auth",
+                "blist":  "help_btn_blist",
+                "lang":   "help_btn_lang",
+                "ping":   "help_btn_ping",
+                "play":   "help_btn_play",
+                "queue":  "help_btn_queue",
+                "stats":  "help_btn_stats",
+                "sudo":   "help_btn_sudo",
+                "song":   "help_btn_song",
+            }
+            buttons = [
+                self.ikb(text=_lang.get(btn_labels[cb], cb), callback_data=f"help {cb}")
+                for cb in cbs
             ]
-            rows = []
-            for cb1, lbl1, cb2, lbl2 in pairs:
-                rows.append([
-                    self.ikb(text=_lang.get(lbl2, cb2), callback_data=f"help {cb2}"),
-                    self.ikb(text=_lang.get(lbl1, cb1), callback_data=f"help {cb1}"),
-                ])
-            rows.append([
-                self.ikb(text=_lang["back"], callback_data="help back"),
-            ])
+            rows = [buttons[i : i + 3] for i in range(0, len(buttons), 3)]
 
         return self.ikm(rows)
 
