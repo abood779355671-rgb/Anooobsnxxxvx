@@ -136,6 +136,7 @@
     "paused": "ストリームが一時停止されました",
     "cmd_delete": "コマンドを削除",
     "play_mode": "管理者のみ再生",
+    "admin_vc_mode": "🎛️ 管理者操作",
     "playing": "再生中",
     "processing": "処理中...",
     "replayed": "ストリームがリプレイされました",
@@ -164,5 +165,15 @@
     "song_send_failed": "オーディオファイルの送信に失敗しました。",
     "song_caption": "🎵 <b>{0}</b>",
     "help_9": "🔍 検索",
-    "help_song": "<u><b>検索コマンド:</b></u>\n<i>ビデオチャットに参加せずに、曲を直接オーディオファイルとしてダウンロードします。</i>\n\n/song [曲名/YouTube URL/リンクへの返信]: 曲を検索してオーディオとしてダウンロードします。\n\n<b>例:</b> <code>/song attention</code>"
+    "help_song": "<u><b>検索コマンド:</b></u>\n<i>ビデオチャットに参加せずに、曲を直接オーディオファイルとしてダウンロードします。</i>\n\n/song [曲名/YouTube URL/リンクへの返信]: 曲を検索してオーディオとしてダウンロードします。\n\n<b>例:</b> <code>/song attention</code>",
+    "vcinfo_fetching": "ボイスチャット情報を取得中...",
+    "vcinfo_error": "情報取得中にエラーが発生しました:\n<code>{0}</code>",
+    "vcinfo_empty": "ボイスチャットに参加者がいません。",
+    "vcinfo_result": "<u><b>📊 ボイスチャット情報</b></u>\n\n<b>グループ:</b> {0}\n\n<b>👥 参加者:</b> <code>{1}</code>\n<b>🔊 発言中:</b> <code>{2}</code>\n<b>🔇 ミュート:</b> <code>{3}</code>\n<b>📹 ビデオオン:</b> <code>{4}</code>\n<b>🖥 画面共有:</b> <code>{5}</code>\n<b>✋ 挙手:</b> <code>{6}</code>",
+    "assist_not_found": "No assistant has been assigned to this group yet.",
+    "assist_info": "<u><b>🤖 Current Assistant</b></u>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}\n<b>Connected:</b> {3}",
+    "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
+    "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
 }
