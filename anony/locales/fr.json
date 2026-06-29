@@ -136,6 +136,7 @@
     "paused": "Flux mis en pause",
     "cmd_delete": "Supprimer la commande",
     "play_mode": "Lecture administrateur uniquement",
+    "admin_vc_mode": "🎛️ Contrôle administrateur",
     "playing": "En cours de lecture",
     "processing": "Traitement...",
     "replayed": "Flux relu",
@@ -164,5 +165,15 @@
     "song_send_failed": "Échec de l'envoi du fichier audio.",
     "song_caption": "🎵 <b>{0}</b>",
     "help_9": "🔍 Recherche",
-    "help_song": "<u><b>Commandes de recherche :</b></u>\n<i>Téléchargez un titre directement en tant que fichier audio sans rejoindre le chat vidéo.</i>\n\n/song [nom de la chanson/URL YouTube/répondre à un lien] : Recherche et télécharge un titre en audio.\n\n<b>Exemple :</b> <code>/song attention</code>"
+    "help_song": "<u><b>Commandes de recherche :</b></u>\n<i>Téléchargez un titre directement en tant que fichier audio sans rejoindre le chat vidéo.</i>\n\n/song [nom de la chanson/URL YouTube/répondre à un lien] : Recherche et télécharge un titre en audio.\n\n<b>Exemple :</b> <code>/song attention</code>",
+    "vcinfo_fetching": "Récupération des infos du chat vocal...",
+    "vcinfo_error": "Une erreur est survenue:\n<code>{0}</code>",
+    "vcinfo_empty": "Aucun participant dans le chat vocal.",
+    "vcinfo_result": "<u><b>📊 Infos Chat Vocal</b></u>\n\n<b>Groupe:</b> {0}\n\n<b>👥 Participants:</b> <code>{1}</code>\n<b>🔊 En train de parler:</b> <code>{2}</code>\n<b>🔇 Muets:</b> <code>{3}</code>\n<b>📹 Vidéo activée:</b> <code>{4}</code>\n<b>🖥 Présentation:</b> <code>{5}</code>\n<b>✋ Main levée:</b> <code>{6}</code>",
+    "assist_not_found": "No assistant has been assigned to this group yet.",
+    "assist_info": "<u><b>🤖 Current Assistant</b></u>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}\n<b>Connected:</b> {3}",
+    "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
+    "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
 }
