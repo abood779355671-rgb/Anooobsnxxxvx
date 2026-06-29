@@ -6,12 +6,12 @@
 from pyrogram import filters, types
 
 from anony import anon, app, db, lang
-from anony.helpers import can_manage_vc, cmd
+from anony.helpers import can_manage_vc_strict, cmd
 
 
-@app.on_message(cmd(["end", "stop", "إيقاف", "وقف", "انهاء", "أنهِ"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["end", "stop", "إيقاف", "وقف", "انهاء", "انهي"]) & filters.group & ~app.bl_users)
 @lang.language()
-@can_manage_vc
+@can_manage_vc_strict
 async def _stop(_, m: types.Message):
     if len(m.command) > 1:
         return
