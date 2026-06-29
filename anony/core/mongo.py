@@ -287,6 +287,13 @@ class MongoDB:
                 self.admin_vc.append(chat_id)
         return chat_id in self.admin_vc
 
+    async def get_play_settings(self, chat_id: int) -> dict:
+        return {
+            "play_mode": await self.get_play_mode(chat_id),
+            "cmd_delete": await self.get_cmd_delete(chat_id),
+            "admin_vc": await self.get_admin_vc(chat_id),
+        }
+
     async def set_admin_vc(self, chat_id: int, remove: bool = False) -> None:
         if remove and chat_id in self.admin_vc:
             self.admin_vc.remove(chat_id)
