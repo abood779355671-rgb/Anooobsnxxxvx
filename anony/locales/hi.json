@@ -136,6 +136,7 @@
     "paused": "स्ट्रीम रोक दिया गया",
     "cmd_delete": "कमांड हटाएँ",
     "play_mode": "केवल व्यवस्थापक द्वारा चलाया जाए",
+    "admin_vc_mode": "🎛️ व्यवस्थापक नियंत्रण",
     "playing": "चल रहा है",
     "processing": "संसाधित हो रहा है...",
     "replayed": "स्ट्रीम फिर से चलाया गया",
@@ -164,5 +165,15 @@
     "song_send_failed": "ऑडियो फ़ाइल भेजने में विफल।",
     "song_caption": "🎵 <b>{0}</b>",
     "help_9": "🔍 खोज",
-    "help_song": "<u><b>खोज आदेश:</b></u>\n<i>वीडियो चैट में शामिल हुए बिना किसी गीत को सीधे ऑडियो फ़ाइल के रूप में डाउनलोड करें।</i>\n\n/song [गीत का नाम/यूट्यूब यूआरएल/लिंक का उत्तर]: गीत खोजें और इसे ऑडियो के रूप में डाउनलोड करें।\n\n<b>उदाहरण:</b> <code>/song attention</code>"
+    "help_song": "<u><b>खोज आदेश:</b></u>\n<i>वीडियो चैट में शामिल हुए बिना किसी गीत को सीधे ऑडियो फ़ाइल के रूप में डाउनलोड करें।</i>\n\n/song [गीत का नाम/यूट्यूब यूआरएल/लिंक का उत्तर]: गीत खोजें और इसे ऑडियो के रूप में डाउनलोड करें।\n\n<b>उदाहरण:</b> <code>/song attention</code>",
+    "vcinfo_fetching": "वॉइस चैट जानकारी प्राप्त हो रही है...",
+    "vcinfo_error": "जानकारी प्राप्त करने में त्रुटि:\n<code>{0}</code>",
+    "vcinfo_empty": "वॉइस चैट में कोई प्रतिभागी नहीं मिला।",
+    "vcinfo_result": "<u><b>📊 वॉइस चैट जानकारी</b></u>\n\n<b>ग्रुप:</b> {0}\n\n<b>👥 प्रतिभागी:</b> <code>{1}</code>\n<b>🔊 बोल रहे हैं:</b> <code>{2}</code>\n<b>🔇 मूक:</b> <code>{3}</code>\n<b>📹 वीडियो चालू:</b> <code>{4}</code>\n<b>🖥 प्रस्तुत कर रहे हैं:</b> <code>{5}</code>\n<b>✋ हाथ उठाया:</b> <code>{6}</code>",
+    "assist_not_found": "No assistant has been assigned to this group yet.",
+    "assist_info": "<u><b>🤖 Current Assistant</b></u>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}\n<b>Connected:</b> {3}",
+    "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
+    "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
 }
