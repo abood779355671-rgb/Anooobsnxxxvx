@@ -165,8 +165,12 @@ class YouTube:
         """Search YouTube via py_yt."""
         try:
             _search = VideosSearch(query, limit=1, with_live=False)
-            results = await _search.next()
-        except Exception:
+            results = await asyncio.wait_for(_search.next(), timeout=20)
+        except asyncio.TimeoutError:
+            logger.warning(f"⏰ YouTube search timed out for query: {query}")
+            return None
+        except Exception as e:
+            logger.warning(f"⚠️ YouTube search error for '{query}': {e}")
             return None
 
         if not results or not results.get("result"):
