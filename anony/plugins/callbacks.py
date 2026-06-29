@@ -8,7 +8,7 @@ import re
 from pyrogram import errors, filters, types
 
 from anony import anon, app, db, lang, queue, tg, yt
-from anony.helpers import admin_check, buttons, can_manage_vc
+from anony.helpers import admin_check, buttons, can_manage_vc_strict
 
 
 @app.on_callback_query(filters.regex("cancel_dl") & ~app.bl_users)
@@ -20,7 +20,7 @@ async def cancel_dl(_, query: types.CallbackQuery):
 
 @app.on_callback_query(filters.regex("controls") & ~app.bl_users)
 @lang.language()
-@can_manage_vc
+@can_manage_vc_strict
 async def _controls(_, query: types.CallbackQuery):
     args = query.data.split()
     action, chat_id = args[1], int(args[2])
@@ -159,6 +159,7 @@ async def _settings_cb(_, query: types.CallbackQuery):
     chat_id = query.message.chat.id
     _admin = await db.get_play_mode(chat_id)
     _delete = await db.get_cmd_delete(chat_id)
+    _admin_vc = await db.get_admin_vc(chat_id)
     _language = await db.get_lang(chat_id)
 
     if cmd[1] == "delete":
@@ -167,11 +168,15 @@ async def _settings_cb(_, query: types.CallbackQuery):
     elif cmd[1] == "play":
         await db.set_play_mode(chat_id, _admin)
         _admin = not _admin
+    elif cmd[1] == "adminvc":
+        await db.set_admin_vc(chat_id, _admin_vc)
+        _admin_vc = not _admin_vc
     await query.edit_message_reply_markup(
         reply_markup=buttons.settings_markup(
             query.lang,
             _admin,
             _delete,
+            _admin_vc,
             _language,
             chat_id,
         )
