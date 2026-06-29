@@ -165,12 +165,7 @@ class YouTube:
         """Search YouTube via py_yt."""
         try:
             _search = VideosSearch(query, limit=1, with_live=False)
-            # استخدام to_thread لأن VideosSearch قد تكون blocking
-            # + wait_for كضمانة إضافية للـ timeout
-            results = await asyncio.wait_for(
-                asyncio.to_thread(_search.next),
-                timeout=20,
-            )
+            results = await asyncio.wait_for(_search.next(), timeout=20)
         except asyncio.TimeoutError:
             logger.warning(f"⏰ YouTube search timed out: {query}")
             return None
