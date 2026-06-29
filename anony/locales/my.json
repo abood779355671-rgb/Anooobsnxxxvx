@@ -136,6 +136,7 @@
     "paused": "ထုတ်လွှင့်မှုကို ခေတ္တရပ်ထားသည်",
     "cmd_delete": "ကွန်မန်းဖျက်ရန်",
     "play_mode": "စီမံခန့်ခွဲသူများသာဖွင့်ရန်",
+    "admin_vc_mode": "🎛️ စီမံခန့်ခွဲသူ ထိန်းချုပ်မှု",
     "playing": "ဖွင့်နေသည်",
     "processing": "လုပ်ဆောင်နေသည်...",
     "replayed": "ထုတ်လွှင့်မှုကို ပြန်လည်ဖွင့်သည်",
@@ -164,5 +165,15 @@
     "song_send_failed": "အသံဖိုင် ပေးပို့ခြင်း မအောင်မြင်ပါ။",
     "song_caption": "🎵 <b>{0}</b>",
     "help_9": "🔍 ရှာဖွေမှု",
-    "help_song": "<u><b>ရှာဖွေမှု အမိန့်များ:</b></u>\n<i>ဗီဒီယိုချတ်သို့ မပါဝင်ဘဲ သီချင်းကို အသံဖိုင်အနေဖြင့် တိုက်ရိုက်ဒေါင်းလုဒ်လုပ်ပါ။</i>\n\n/song [သီချင်းအမည်/youtube url/လင့်ခ်သို့ ပြန်ကြားချက်]: သီချင်းရှာဖွေ၍ အသံဖိုင်အနေဖြင့် ဒေါင်းလုဒ်လုပ်ပါ။\n\n<b>ဥပမာ:</b> <code>/song attention</code>"
+    "help_song": "<u><b>ရှာဖွေမှု အမိန့်များ:</b></u>\n<i>ဗီဒီယိုချတ်သို့ မပါဝင်ဘဲ သီချင်းကို အသံဖိုင်အနေဖြင့် တိုက်ရိုက်ဒေါင်းလုဒ်လုပ်ပါ။</i>\n\n/song [သီချင်းအမည်/youtube url/လင့်ခ်သို့ ပြန်ကြားချက်]: သီချင်းရှာဖွေ၍ အသံဖိုင်အနေဖြင့် ဒေါင်းလုဒ်လုပ်ပါ။\n\n<b>ဥပမာ:</b> <code>/song attention</code>",
+    "vcinfo_fetching": "Voice chat အချက်အလက်ရယူနေသည်...",
+    "vcinfo_error": "အချက်အလက်ရယူရာတွင် အမှားဖြစ်ပေါ်:\n<code>{0}</code>",
+    "vcinfo_empty": "Voice chat တွင် ပါဝင်သူမရှိပါ။",
+    "vcinfo_result": "<u><b>📊 Voice Chat အချက်အလက်</b></u>\n\n<b>အုပ်စု:</b> {0}\n\n<b>👥 ပါဝင်သူ:</b> <code>{1}</code>\n<b>🔊 ပြောနေသူ:</b> <code>{2}</code>\n<b>🔇 ပိတ်ထားသူ:</b> <code>{3}</code>\n<b>📹 ဗီဒီယိုဖွင့်:</b> <code>{4}</code>\n<b>🖥 မျက်နှာပြင်မျှဝေ:</b> <code>{5}</code>\n<b>✋ လက်ထောင်:</b> <code>{6}</code>",
+    "assist_not_found": "No assistant has been assigned to this group yet.",
+    "assist_info": "<u><b>🤖 Current Assistant</b></u>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}\n<b>Connected:</b> {3}",
+    "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
+    "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
 }
