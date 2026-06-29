@@ -52,7 +52,7 @@ def _prepare_thumb(path: str) -> str | None:
         return None
 
 
-@app.on_message(cmd(["song", "بحث"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["song", "بحث", "أغنية", "تحميل"]) & filters.group & ~app.bl_users)
 @lang.language()
 async def search_song(_, m: types.Message) -> None:
     # Auto-delete the command message itself (consistent with /play).
