@@ -21,24 +21,20 @@ def checkUB(play):
             await m.reply_text(m.lang["play_chat_invalid"])
             return await app.leave_chat(chat_id)
 
-        AR_MODE = ["فيديو", "فوري"]
         if not m.reply_to_message and (
-            len(m.command) < 2
-            or (len(m.command) == 2 and m.command[1] in ["-f"] + AR_MODE)
+            len(m.command) < 2 or (len(m.command) == 2 and m.command[1] == "-f")
         ):
             return await m.reply_text(m.lang["play_usage"])
 
         if len(queue.get_queue(chat_id)) >= config.QUEUE_LIMIT:
             return await m.reply_text(m.lang["play_queue_full"].format(config.QUEUE_LIMIT))
 
-        force = (
-            m.command[0].endswith("force")
-            or (len(m.command) > 1 and "-f" in m.command[1])
-            or (len(m.command) > 1 and "فوري" in m.command[1:])
+        force = m.command[0].endswith("force") or (
+            len(m.command) > 1 and "-f" in m.command[1]
         )
+        video_cmds = ("vplay", "vplayforce", "تشغيل_فيديو", "فيديو")
         video = (
-            m.command[0][0] == "v"
-            or (len(m.command) > 1 and "فيديو" in m.command[1:])
+            m.command[0][0] == "v" or m.command[0] in video_cmds
         ) and config.VIDEO_PLAY
         url = utils.get_url(m)
         if url and yt.invalid(url):
