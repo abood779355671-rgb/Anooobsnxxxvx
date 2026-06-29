@@ -9,7 +9,7 @@ from anony import app, db, lang
 from anony.helpers import utils, cmd
 
 
-@app.on_message(cmd(["addsudo", "delsudo", "rmsudo"]) & filters.user(app.owner))
+@app.on_message(cmd(["addsudo", "delsudo", "rmsudo", "اضافة_مشرف", "حذف_مشرف"]) & filters.user(app.owner))
 @lang.language()
 async def _sudo(_, m: types.Message):
     user = await utils.extract_user(m)
@@ -34,7 +34,7 @@ async def _sudo(_, m: types.Message):
 
 o_mention = None
 
-@app.on_message(cmd(["listsudo", "sudolist"]))
+@app.on_message(cmd(["listsudo", "sudolist", "قائمة_المشرفين", "المشرفون"]))
 @lang.language()
 async def _listsudo(_, m: types.Message):
     global o_mention
