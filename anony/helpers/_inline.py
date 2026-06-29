@@ -58,9 +58,21 @@ class Inline:
             ]
         else:
             cbs = ["admins", "auth", "blist", "lang", "ping", "play", "queue", "stats", "sudo", "song"]
+            btn_labels = {
+                "admins": "help_btn_admins",
+                "auth":   "help_btn_auth",
+                "blist":  "help_btn_blist",
+                "lang":   "help_btn_lang",
+                "ping":   "help_btn_ping",
+                "play":   "help_btn_play",
+                "queue":  "help_btn_queue",
+                "stats":  "help_btn_stats",
+                "sudo":   "help_btn_sudo",
+                "song":   "help_btn_song",
+            }
             buttons = [
-                self.ikb(text=_lang[f"help_{i}"], callback_data=f"help {cb}")
-                for i, cb in enumerate(cbs)
+                self.ikb(text=_lang.get(btn_labels[cb], cb), callback_data=f"help {cb}")
+                for cb in cbs
             ]
             rows = [buttons[i : i + 3] for i in range(0, len(buttons), 3)]
 
@@ -104,7 +116,13 @@ class Inline:
         )
 
     def settings_markup(
-        self, lang: dict, admin_only: bool, cmd_delete: bool, language: str, chat_id: int
+        self,
+        lang: dict,
+        admin_only: bool,
+        cmd_delete: bool,
+        admin_vc: bool,
+        language: str,
+        chat_id: int,
     ) -> types.InlineKeyboardMarkup:
         return self.ikm(
             [
@@ -121,6 +139,13 @@ class Inline:
                         callback_data="settings",
                     ),
                     self.ikb(text=cmd_delete, callback_data="settings delete"),
+                ],
+                [
+                    self.ikb(
+                        text=lang["admin_vc_mode"] + " ➜",
+                        callback_data="settings",
+                    ),
+                    self.ikb(text=admin_vc, callback_data="settings adminvc"),
                 ],
                 [
                     self.ikb(
@@ -166,7 +191,7 @@ class Inline:
             [
                 [
                     self.ikb(text="❐", copy_text=link),
-                    self.ikb(text="Youtube", url=link),
+                    self.ikb(text="يوتيوب 🎬", url=link),
                 ],
             ]
         )
