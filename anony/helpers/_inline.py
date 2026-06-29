@@ -25,25 +25,36 @@ class Inline:
         remove: bool = False,
     ) -> types.InlineKeyboardMarkup:
         keyboard = []
-        if status:
-            keyboard.append(
-                [self.ikb(text=status, callback_data=f"controls status {chat_id}")]
-            )
-        elif timer:
-            keyboard.append(
-                [self.ikb(text=timer, callback_data=f"controls status {chat_id}")]
-            )
 
         if not remove:
+            # صف 1 — أزرار التحكم الرئيسية
             keyboard.append(
                 [
-                    self.ikb(text="▷", callback_data=f"controls resume {chat_id}"),
-                    self.ikb(text="II", callback_data=f"controls pause {chat_id}"),
-                    self.ikb(text="⥁", callback_data=f"controls replay {chat_id}"),
-                    self.ikb(text="‣‣I", callback_data=f"controls skip {chat_id}"),
-                    self.ikb(text="▢", callback_data=f"controls stop {chat_id}"),
+                    self.ikb(text="◉", callback_data=f"controls resume {chat_id}"),
+                    self.ikb(text="◎", callback_data=f"controls pause {chat_id}"),
+                    self.ikb(text="↺", callback_data=f"controls replay {chat_id}"),
+                    self.ikb(text="◈", callback_data=f"controls skip {chat_id}"),
+                    self.ikb(text="⊘", callback_data=f"controls stop {chat_id}"),
                 ]
             )
+            # صف 2 — seek ±15 ثانية مع الوقت في المنتصف
+            seek_mid = status or timer or "00:00"
+            keyboard.append(
+                [
+                    self.ikb(text="→ 15", callback_data=f"controls seekf {chat_id}"),
+                    self.ikb(text=seek_mid, callback_data=f"controls status {chat_id}"),
+                    self.ikb(text="15 ←", callback_data=f"controls seekb {chat_id}"),
+                ]
+            )
+            # صف 3 — إعدادات
+            keyboard.append(
+                [self.ikb(text="⚙️", callback_data=f"controls status {chat_id}")]
+            )
+            # صف 4 — إخفاء (أحمر)
+            keyboard.append(
+                [self.ikb(text="🚫", callback_data=f"controls hide {chat_id}")]
+            )
+
         return self.ikm(keyboard)
 
     def help_markup(
