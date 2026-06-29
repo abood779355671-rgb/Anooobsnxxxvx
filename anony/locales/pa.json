@@ -136,6 +136,7 @@
     "paused": "ਸਟ੍ਰੀਮ ਰੋਕੀ ਗਈ",
     "cmd_delete": "ਕਮਾਂਡ ਮਿਟਾਓ",
     "play_mode": "ਸਿਰਫ਼ ਪ੍ਰਬੰਧਕ ਹੀ ਚਲਾ ਸਕਦੇ ਹਨ",
+    "admin_vc_mode": "🎛️ ਪ੍ਰਬੰਧਕ ਨਿਯੰਤਰਣ",
     "playing": "ਚੱਲ ਰਿਹਾ ਹੈ",
     "processing": "ਪ੍ਰਕਿਰਿਆ ਜਾਰੀ ਹੈ...",
     "replayed": "ਸਟ੍ਰੀਮ ਦੁਬਾਰਾ ਚਲਾਈ ਗਈ",
@@ -164,5 +165,15 @@
     "song_send_failed": "ਆਡੀਓ ਫਾਈਲ ਭੇਜਣ ਵਿੱਚ ਅਸਫਲ।",
     "song_caption": "🎵 <b>{0}</b>",
     "help_9": "🔍 ਖੋਜ",
-    "help_song": "<u><b>ਖੋਜ ਕਮਾਂਡਾਂ:</b></u>\n<i>ਵੀਡੀਓ ਚੈਟ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਣ ਤੋਂ ਬਿਨਾਂ ਇੱਕ ਗਾਣਾ ਸਿੱਧਾ ਆਡੀਓ ਫਾਈਲ ਵਜੋਂ ਡਾਊਨਲੋਡ ਕਰੋ।</i>\n\n/song [ਗਾਣੇ ਦਾ ਨਾਮ/ਯੂਟਿਊਬ ਯੂਆਰਐਲ/ਲਿੰਕ ਦਾ ਜਵਾਬ]: ਗਾਣਾ ਖੋਜੋ ਅਤੇ ਇਸਨੂੰ ਆਡੀਓ ਵਜੋਂ ਡਾਊਨਲੋਡ ਕਰੋ।\n\n<b>ਉਦਾਹਰਨ:</b> <code>/song attention</code>"
+    "help_song": "<u><b>ਖੋਜ ਕਮਾਂਡਾਂ:</b></u>\n<i>ਵੀਡੀਓ ਚੈਟ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਣ ਤੋਂ ਬਿਨਾਂ ਇੱਕ ਗਾਣਾ ਸਿੱਧਾ ਆਡੀਓ ਫਾਈਲ ਵਜੋਂ ਡਾਊਨਲੋਡ ਕਰੋ।</i>\n\n/song [ਗਾਣੇ ਦਾ ਨਾਮ/ਯੂਟਿਊਬ ਯੂਆਰਐਲ/ਲਿੰਕ ਦਾ ਜਵਾਬ]: ਗਾਣਾ ਖੋਜੋ ਅਤੇ ਇਸਨੂੰ ਆਡੀਓ ਵਜੋਂ ਡਾਊਨਲੋਡ ਕਰੋ।\n\n<b>ਉਦਾਹਰਨ:</b> <code>/song attention</code>",
+    "vcinfo_fetching": "ਵੌਇਸ ਚੈਟ ਜਾਣਕਾਰੀ ਲਈ ਜਾ ਰਹੀ ਹੈ...",
+    "vcinfo_error": "ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ:\n<code>{0}</code>",
+    "vcinfo_empty": "ਵੌਇਸ ਚੈਟ ਵਿੱਚ ਕੋਈ ਭਾਗੀਦਾਰ ਨਹੀਂ।",
+    "vcinfo_result": "<u><b>📊 ਵੌਇਸ ਚੈਟ ਜਾਣਕਾਰੀ</b></u>\n\n<b>ਗਰੁੱਪ:</b> {0}\n\n<b>👥 ਭਾਗੀਦਾਰ:</b> <code>{1}</code>\n<b>🔊 ਬੋਲ ਰਹੇ ਹਨ:</b> <code>{2}</code>\n<b>🔇 ਮਿਊਟ:</b> <code>{3}</code>\n<b>📹 ਵੀਡੀਓ ਚਾਲੂ:</b> <code>{4}</code>\n<b>🖥 ਪੇਸ਼ਕਾਰੀ:</b> <code>{5}</code>\n<b>✋ ਹੱਥ ਚੁੱਕਿਆ:</b> <code>{6}</code>",
+    "assist_not_found": "No assistant has been assigned to this group yet.",
+    "assist_info": "<u><b>🤖 Current Assistant</b></u>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}\n<b>Connected:</b> {3}",
+    "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
+    "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
 }
