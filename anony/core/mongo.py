@@ -22,6 +22,7 @@ class MongoDB:
         self.admin_list = {}
         self.active_calls = {}
         self.admin_play = []
+        self.admin_vc = []
         self.blacklisted = []
         self.cmd_delete = []
         self.loop = {}
@@ -275,6 +276,25 @@ class MongoDB:
         await self.chatsdb.update_one(
             {"_id": chat_id},
             {"$set": {"admin_play": not remove}},
+            upsert=True,
+        )
+
+    # ADMIN VC METHODS
+    async def get_admin_vc(self, chat_id: int) -> bool:
+        if chat_id not in self.admin_vc:
+            doc = await self.chatsdb.find_one({"_id": chat_id})
+            if doc and doc.get("admin_vc"):
+                self.admin_vc.append(chat_id)
+        return chat_id in self.admin_vc
+
+    async def set_admin_vc(self, chat_id: int, remove: bool = False) -> None:
+        if remove and chat_id in self.admin_vc:
+            self.admin_vc.remove(chat_id)
+        else:
+            self.admin_vc.append(chat_id)
+        await self.chatsdb.update_one(
+            {"_id": chat_id},
+            {"$set": {"admin_vc": not remove}},
             upsert=True,
         )
 
