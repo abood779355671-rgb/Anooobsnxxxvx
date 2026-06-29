@@ -89,13 +89,18 @@ class TgCall(PyTgCalls):
                     media.user,
                 )
                 keyboard = buttons.controls(chat_id)
-                # حذف رسالة ⚡ وإرسال رسالة التشغيل جديدة
                 try:
-                    await message.delete()
-                except Exception:
-                    pass
-
-                try:
+                    if _thumb:
+                        await message.edit_media(
+                            media=InputMediaPhoto(
+                                media=_thumb,
+                                caption=text,
+                            ),
+                            reply_markup=keyboard,
+                        )
+                    else:
+                        await message.edit_text(text, reply_markup=keyboard)
+                except (ChatSendMediaForbidden, ChatSendPhotosForbidden, MessageIdInvalid):
                     if _thumb:
                         sent = await app.send_photo(
                             chat_id=chat_id,
@@ -110,8 +115,6 @@ class TgCall(PyTgCalls):
                             reply_markup=keyboard,
                         )
                     media.message_id = sent.id
-                except Exception:
-                    pass
         except FileNotFoundError:
             await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
             await self.play_next(chat_id)
