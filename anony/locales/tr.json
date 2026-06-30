@@ -175,5 +175,16 @@
     "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
     "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
     "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
-    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "vcjoined_fetching": "Sesli sohbet katılımcıları alınıyor...",
+    "vcjoined_error": "Katılımcılar alınırken hata oluştu:\n<code>{0}</code>",
+    "vcjoined_empty": "Şu anda sesli sohbette kimse yok.",
+    "vcjoined_result": "<u><b>🎙 Sesli Sohbet Katılımcıları</b></u>\n\n<b>Grup:</b> {0}\n<b>Toplam:</b> <code>{1}</code>\n\n{2}",
+    "vcjoined_item": "<b>{0}.</b> {1} {2}\n",
+    "vc_open_opening": "🎙 Sesli sohbet açılıyor...",
+    "vc_open_success": "✅ <b>Sesli sohbet başarıyla açıldı.</b>\n\nAçan: {0}",
+    "vc_open_error": "❌ Sesli sohbet açılamadı:\n<code>{0}</code>\n\nAsistan hesabının grupta yönetici olduğundan ve sesli sohbetleri yönetme iznine sahip olduğundan emin olun.",
+    "vc_close_closing": "🔴 Sesli sohbet kapatılıyor...",
+    "vc_close_success": "✅ <b>Sesli sohbet başarıyla kapatıldı.</b>\n\nKapatan: {0}",
+    "vc_close_error": "❌ Sesli sohbet kapatılırken bir hata oluştu:\n<code>{0}</code>"
 }
