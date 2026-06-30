@@ -51,3 +51,44 @@ async def _vcinfo(_, m: types.Message):
     )
 
     await sent.edit_text(text)
+
+
+@app.on_message(cmd(["vcusers", "الصاعدين"]) & filters.group & ~app.bl_users)
+@lang.language()
+async def _vc_joined(_, m: types.Message):
+    if not await db.get_call(m.chat.id):
+        return await m.reply_text(m.lang["not_playing"])
+
+    sent = await m.reply_text(m.lang["vcjoined_fetching"])
+
+    try:
+        client = await db.get_assistant(m.chat.id)
+        participants = await client.get_participants(m.chat.id)
+    except Exception as e:
+        return await sent.edit_text(m.lang["vcjoined_error"].format(str(e)))
+
+    if not participants:
+        return await sent.edit_text(m.lang["vcjoined_empty"])
+
+    lines = ""
+    count = 0
+    for p in participants:
+        user_id = getattr(p, "user_id", None)
+        if not user_id:
+            continue
+        try:
+            user = await app.get_users(user_id)
+            name = user.mention
+        except Exception:
+            name = f"<code>{user_id}</code>"
+
+        muted = getattr(p, "muted", False)
+        status = "🔇" if muted else "🔊"
+        count += 1
+        lines += m.lang["vcjoined_item"].format(count, name, status)
+
+    if not count:
+        return await sent.edit_text(m.lang["vcjoined_empty"])
+
+    text = m.lang["vcjoined_result"].format(m.chat.title, count, lines)
+    await sent.edit_text(text)
