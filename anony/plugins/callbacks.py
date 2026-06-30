@@ -97,31 +97,6 @@ async def _controls(_, query: types.CallbackQuery):
         status = query.lang["replayed"]
         reply = query.lang["play_replayed"].format(user)
 
-    elif action == "seekf":
-        media = queue.get_current(chat_id)
-        if not media or not media.duration_sec:
-            return await query.answer(query.lang["play_seek_no_dur"], show_alert=True)
-        start_from = min(media.time + 15, media.duration_sec - 5)
-        await anon.play_media(chat_id, query.message, media, start_from)
-        media.time = start_from
-        return await query.answer()
-
-    elif action == "seekb":
-        media = queue.get_current(chat_id)
-        if not media or not media.duration_sec:
-            return await query.answer(query.lang["play_seek_no_dur"], show_alert=True)
-        start_from = max(media.time - 15, 1)
-        await anon.play_media(chat_id, query.message, media, start_from)
-        media.time = start_from
-        return await query.answer()
-
-    elif action == "hide":
-        try:
-            await query.message.delete()
-        except Exception:
-            pass
-        return
-
     elif action == "stop":
         await anon.stop(chat_id)
         status = query.lang["stopped"]
@@ -146,14 +121,6 @@ async def _controls(_, query: types.CallbackQuery):
         )
     except Exception:
         pass
-
-
-@app.on_callback_query(filters.regex("delete_this") & ~app.bl_users)
-async def _delete_this(_, query: types.CallbackQuery):
-    try:
-        await query.message.delete()
-    except Exception:
-        await query.answer()
 
 
 @app.on_callback_query(filters.regex("help") & ~app.bl_users)
