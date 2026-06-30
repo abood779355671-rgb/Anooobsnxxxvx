@@ -3,6 +3,9 @@
 # This file is part of AnonXMusic
 
 
+import asyncio
+from pathlib import Path
+
 from ntgcalls import (ConnectionNotFound, TelegramServerError,
                       RTMPStreamingUnsupported, ConnectionError)
 from pyrogram.errors import (ChatSendMediaForbidden, ChatSendPhotosForbidden,
@@ -38,6 +41,57 @@ class TgCall(PyTgCalls):
 
         try:
             await client.leave_call(chat_id, close=False)
+        except Exception:
+            pass
+
+
+    async def _silence_file(self) -> str:
+        """Generate (once) and return the path to a long silent audio file,
+        used so the assistant can join/keep a voice chat open without
+        playing any real media."""
+        path = "cache/silence.ogg"
+        if not Path(path).exists():
+            proc = await asyncio.create_subprocess_exec(
+                "ffmpeg", "-y",
+                "-f", "lavfi", "-i", "anullsrc=channel_layout=stereo:sample_rate=48000",
+                "-t", "10800",
+                "-c:a", "libopus", "-b:a", "8k",
+                path,
+                stdout=asyncio.subprocess.DEVNULL,
+                stderr=asyncio.subprocess.DEVNULL,
+            )
+            await proc.wait()
+        return path
+
+
+    async def open_call(self, chat_id: int) -> None:
+        """Join the group's voice chat, creating it if it isn't already
+        active. Requires the assistant account to be an admin of the group
+        with permission to manage voice chats."""
+        client = await db.get_assistant(chat_id)
+        silence = await self._silence_file()
+        stream = types.MediaStream(
+            media_path=silence,
+            audio_parameters=types.AudioQuality.HIGH,
+            audio_flags=types.MediaStream.Flags.REQUIRED,
+            video_flags=types.MediaStream.Flags.IGNORE,
+        )
+        await client.play(
+            chat_id=chat_id,
+            stream=stream,
+            config=types.GroupCallConfig(auto_start=True),
+        )
+
+
+    async def close_call(self, chat_id: int) -> None:
+        """Fully end the group's voice chat for everyone (not just leave it)."""
+        client = await db.get_assistant(chat_id)
+        queue.clear(chat_id)
+        await db.remove_call(chat_id)
+        await db.set_loop(chat_id, 0)
+
+        try:
+            await client.leave_call(chat_id, close=True)
         except Exception:
             pass
 
