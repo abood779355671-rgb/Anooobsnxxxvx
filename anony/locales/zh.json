@@ -175,5 +175,16 @@
     "assist_set": "✅ <b>Assistant updated successfully!</b>\n\n<b>Number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
     "assist_set_invalid": "❌ Invalid number.\n\nPlease send a number between <code>1</code> and <code>{0}</code>.\n<b>Example:</b> <code>/setassistant 1</code>",
     "assist_list": "<u><b>🤖 Connected Assistants:</b></u>\n",
-    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}"
+    "assist_reassigned": "🔀 <b>Assistant randomly reassigned!</b>\n\n<b>New number:</b> <code>{0}</code>\n<b>Name:</b> {1}\n<b>Username:</b> {2}",
+    "vcjoined_fetching": "正在获取语音聊天参与者...",
+    "vcjoined_error": "获取参与者时发生错误:\n<code>{0}</code>",
+    "vcjoined_empty": "目前语音聊天中没有人。",
+    "vcjoined_result": "<u><b>🎙 语音聊天参与者</b></u>\n\n<b>群组:</b> {0}\n<b>总数:</b> <code>{1}</code>\n\n{2}",
+    "vcjoined_item": "<b>{0}.</b> {1} {2}\n",
+    "vc_open_opening": "🎙 正在打开语音聊天...",
+    "vc_open_success": "✅ <b>语音聊天已成功打开。</b>\n\n操作者: {0}",
+    "vc_open_error": "❌ 无法打开语音聊天:\n<code>{0}</code>\n\n请确保助理账号是群组管理员并拥有管理语音聊天的权限。",
+    "vc_close_closing": "🔴 正在关闭语音聊天...",
+    "vc_close_success": "✅ <b>语音聊天已成功关闭。</b>\n\n操作者: {0}",
+    "vc_close_error": "❌ 关闭语音聊天时发生错误:\n<code>{0}</code>"
 }
