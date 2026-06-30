@@ -150,6 +150,9 @@ class Inline:
                     ),
                     self.ikb(text=lang_codes[language], callback_data="language"),
                 ],
+                [
+                    self.ikb(text=lang["close"], callback_data=f"settings close {chat_id}"),
+                ],
             ]
         )
 
