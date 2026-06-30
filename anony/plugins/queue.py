@@ -9,7 +9,7 @@ from anony import app, config, db, lang, queue, thumb
 from anony.helpers import Track, buttons, cmd
 
 
-@app.on_message(cmd(["queue", "playing", "قائمة", "يشتغل", "الطابور"]) & filters.group & ~app.bl_users)
+@app.on_message(cmd(["queue", "playing", "قائمة", "يشتغل", "الطابور", "الاغاني", "الأغاني"]) & filters.group & ~app.bl_users)
 @lang.language()
 async def _queue_func(_, m: types.Message):
     if not await db.get_call(m.chat.id):
